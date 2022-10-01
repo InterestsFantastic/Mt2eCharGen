@@ -1,9 +1,11 @@
 from roller import roll
-from mt2e_mechanics import roll_normal, roll_boon, roll_bane
+from mt2e_mechanics import roll_normal, roll_boon, roll_bane, \
+    characteristic_modifier
 from copy import copy
 
 class Character:
     def __init__(self, gen_method='normal'):
+        '''gen_method can bet set to 'boon' or 'bane' if desired.'''
         self.gen(gen_method)
 
     def gen(self, gen_method):
@@ -27,3 +29,4 @@ class Character:
 if __name__ == '__main__':
     c = Character()
     c.print_attribs()
+    
