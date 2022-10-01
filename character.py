@@ -18,6 +18,7 @@ class Character:
         attrib_rolls = []
         for x in range(6):
             attrib_rolls.append(attribute_diceroll())
+        # copy may be unnecessary here.
         self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(attrib_rolls)
 
     def print_attribs(self):
