@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from roller import roll
 
 def roll_normal():
