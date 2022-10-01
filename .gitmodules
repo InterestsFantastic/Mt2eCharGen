@@ -4,3 +4,6 @@
 [submodule "rpgroller"]
 	path = rpgroller
 	url = https://github.com/InterestsFantastic/rpgroller.git
+[submodule "TravellerLetterNumbers"]
+	path = TravellerLetterNumbers
+	url = https://github.com/InterestsFantastic/TravellerDiceLetterNumbers.git

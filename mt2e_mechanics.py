@@ -1,5 +1,17 @@
 #!/usr/bin/python3
 from rpgroller.roller import roll
+from random import randint
+
+def rd66():
+    return randint(1,6) * 10 + randint(1,6)
+
+def one_third():
+    '''Returns success or failure for a 1/3 check.'''
+    return randint(1,3) == 1
+
+def coin_toss():
+    '''Returns success or failure for a 1/2 check.'''
+    return randint(1,2) == 1
 
 def roll_normal():
     return roll('2d6')
