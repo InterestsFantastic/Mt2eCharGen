@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from roller import roll
+from rpgroller.roller import roll
 
 def roll_normal():
     return roll('2d6')
@@ -35,3 +35,4 @@ def characteristic_modifier(num):
     elif num > 14:
         return 3
     assert False, f'Improper characteristic modifier requested: {num}'
+

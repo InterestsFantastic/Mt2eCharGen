@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from roller import roll
 from mt2e_mechanics import roll_normal, roll_boon, roll_bane, \
     characteristic_modifier
 from copy import copy
