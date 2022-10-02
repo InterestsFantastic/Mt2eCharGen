@@ -23,10 +23,36 @@ class Character:
         # copy may be unnecessary here.
         self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(attrib_rolls)
 
+
+    def characteristic_modifier(self, characteristic):
+        '''Returns the characteristic modifier resultant from having a characteristic at a certain value, e.g. int returns 0 if character's int is 7.'''
+        # What does getattr return if attr not found?
+        score = getattr(self, characteristic)
+        return characteristic_modifier(score)
+        
+    def characteristic_roll(self, target, rolltype = 'normal'):
+        '''Rolls dice against a target using characteristic modifier.
+        Will handle rolltype 'boon' and 'bane'.
+        Assumption is that all rolls will be +'''
+        # Pick appropriate rolling function to call.
+        rollmethod = roll_normal
+        if rolltype == 'boon':
+            rollmethod = roll_boon
+        elif rolltype == 'bane':
+            rollemethod = roll_bane
+
+        # Splits characteristic and target number and removes the + at the end.
+        characteristic, target = target[:-1].split()
+        target = int(target)
+
+        thisroll = rollmethod()
+        return thisroll + self.characteristic_modifier(characteristic) >= target
+                
     def print_attribs(self):
         print(self.str, self.dex, self.end, self.int, self.edu, self.soc)
 
 if __name__ == '__main__':
     c = Character()
     c.print_attribs()
-    
+    print('str mod: ', c.characteristic_modifier('str'))
+
