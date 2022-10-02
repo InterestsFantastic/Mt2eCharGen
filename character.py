@@ -11,17 +11,17 @@ class Character:
     def gen(self, gen_method):
         # Pick appropriate rolling function to call.
         if gen_method == 'normal':
-            attribute_diceroll = roll_normal
+            characteristic_diceroll = roll_normal
         if gen_method == 'boon':
-            attribute_diceroll = roll_boon
+            characteristic_diceroll = roll_boon
         if gen_method == 'bane':
-            attribute_diceroll = roll_bane
+            characteristic_diceroll = roll_bane
 
-        attrib_rolls = []
+        characteristic_rolls = []
         for x in range(6):
-            attrib_rolls.append(attribute_diceroll())
+            characteristic_rolls.append(characteristic_diceroll())
         # copy may be unnecessary here.
-        self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(attrib_rolls)
+        self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(characteristic_rolls)
 
 
     def characteristic_modifier(self, characteristic):
@@ -48,11 +48,11 @@ class Character:
         thisroll = rollmethod()
         return thisroll + self.characteristic_modifier(characteristic) >= target
                 
-    def print_attribs(self):
+    def print_characteristics(self):
         print(self.str, self.dex, self.end, self.int, self.edu, self.soc)
 
 if __name__ == '__main__':
     c = Character()
-    c.print_attribs()
+    c.print_characteristics()
     print('str mod: ', c.characteristic_modifier('str'))
 
