@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from mt2e_mechanics import roll_normal, roll_boon, roll_bane, \
-    characteristic_modifier
+    characteristic_modifier, educations
 from copy import copy
 
 class Character:
@@ -10,7 +10,9 @@ class Character:
             self.gen(gen_method)
 
     def gen(self, gen_method='normal'):
-        # Pick appropriate rolling function to call.
+        self.terms=1
+
+        # Pick appropriate rolling function to call.        
         if gen_method == 'normal':
             characteristic_diceroll = roll_normal
         elif gen_method == 'boon':
@@ -31,7 +33,7 @@ class Character:
         score = getattr(self, characteristic)
         return characteristic_modifier(score)
         
-    def characteristic_roll(self, target, rolltype = 'normal'):
+    def characteristic_roll(self, target, dm=0, rolltype = 'normal'):
         '''Rolls dice against a target using characteristic modifier.
         Will handle rolltype 'boon' and 'bane'.
         Assumption is that all rolls will be +'''
@@ -47,7 +49,7 @@ class Character:
         target = int(target)
 
         thisroll = rollmethod()
-        return thisroll + self.characteristic_modifier(characteristic) >= target
+        return thisroll + dm + self.characteristic_modifier(characteristic) >= target
                 
     def print_characteristics(self):
         print(self.str, self.dex, self.end, self.int, self.edu, self.soc)
