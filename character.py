@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from mt2e_mechanics import roll_normal, roll_boon, roll_bane, \
-    characteristic_modifier, educations
+    characteristic_modifier, educations, rollparse, characteristic_modifiers
 from copy import copy
 
 class Character:
@@ -35,9 +35,10 @@ class Character:
         return characteristic_modifier(score)
         
     def characteristic_roll(self, target, dm=0, rolltype = 'normal'):
-        '''Rolls dice against a target using characteristic modifier.
+        '''Rolls dice against a target using characteristic OR skill modifier.
+        In the case of the latter, useful mostly during career progression.
         Will handle rolltype 'boon' and 'bane'.
-        Assumption is that all rolls will be +'''
+        The assumption is that all rolls will be +'''
         # Pick appropriate rolling function to call.
         rollmethod = roll_normal
         if rolltype == 'boon':
@@ -46,11 +47,15 @@ class Character:
             rollemethod = roll_bane
 
         # Splits characteristic and target number and removes the + at the end.
-        characteristic, target = target[:-1].split()
-        target = int(target)
+        characteristic, target = rollparse(target)
+        if characteristic in characteristic_modifiers:
+            dm += self.characteristic_modifier(characteristic)
+# eventually something like this here.
+##        elif characteristic in skills:
+##            dm += self.skill[characteristic]
 
         thisroll = rollmethod()
-        return thisroll + dm + self.characteristic_modifier(characteristic) >= target
+        return thisroll + dm >= target
                 
     def print_characteristics(self):
         print(self.str, self.dex, self.end, self.int, self.edu, self.soc)
