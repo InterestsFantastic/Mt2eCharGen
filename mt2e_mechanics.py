@@ -35,6 +35,12 @@ educations_funcs = [str, str, int, int, int, str, int, int, int]
 educations = record_reader(education_sheet, *educations_funcs)
 educations = create_educations(educations)
 
+def rollparse(target):
+    '''Converts something like 'int 7+' into (int, 7).'''
+    characteristic, target = target[:-1].split()
+    target = int(target)
+    return characteristic, target
+
 def rd66():
     return randint(1,6) * 10 + randint(1,6)
 
