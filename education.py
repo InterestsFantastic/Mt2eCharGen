@@ -20,7 +20,16 @@ class Education:
         if char.soc >= 9:
             dm += self.entry_dm_soc9
 
-        return char.characteristic_roll(self.entry, dm)
+        result = char.characteristic_roll(self.entry, dm)
+        
+        logstr = f'Attempted entry into {self.name.title()}: '
+        if result:
+            logstr += 'Success.'
+        else:
+            logstr += 'Failure.'
+
+        char.log.append(logstr)
+        return result
 
     def attempt_grad(self, char):
         # generate DMs

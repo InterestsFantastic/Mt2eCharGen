@@ -11,6 +11,7 @@ class Character:
 
     def gen(self, gen_method='normal'):
         self.terms=1
+        self.log = []
 
         # Pick appropriate rolling function to call.        
         if gen_method == 'normal':
@@ -58,4 +59,7 @@ if __name__ == '__main__':
     c = Character()
     c.print_characteristics()
     print('str mod: ', c.characteristic_modifier('str'))
+    educations[0].attempt_entry(c)
+    print(c.log)
+    
 
