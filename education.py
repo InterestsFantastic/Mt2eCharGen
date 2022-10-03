@@ -34,4 +34,3 @@ class Education:
         # characteristic_target vs. characteristic_roll?
         # change characteristic i.e. int +1 in character?
         return char.characteristic_roll(self.grad, dm)
-        
