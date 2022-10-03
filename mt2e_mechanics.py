@@ -17,7 +17,9 @@ def characteristic_modifier(num):
         return characteristic_modifiers[num]
     elif num > 14:
         return 3
-    assert False, f'Improper characteristic modifier requested: {num}'
+    else:
+        # negative numbers.
+        assert False, f'Improper characteristic modifier requested: {num}'
 
 noble_titles = mechanics.getSheet('NobleTitles')
 noble_titles = keyval(noble_titles, int, str)
