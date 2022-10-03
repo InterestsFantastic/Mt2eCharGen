@@ -9,7 +9,6 @@ mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
 characteristic_modifiers = mechanics.getSheet('CharacteristicModifiers')
 characteristic_modifiers = keyval(characteristic_modifiers, int)
-
 def characteristic_modifier(num):
     '''Returns the diceroll modifier for having a particular value
     in a characteristic'''
@@ -18,6 +17,15 @@ def characteristic_modifier(num):
     elif num > 14:
         return 3
     assert False, f'Improper characteristic modifier requested: {num}'
+
+noble_titles = mechanics.getSheet('NobleTitles')
+noble_titles = keyval(noble_titles, int, str)
+def noble_title(num):
+    '''Returns the noble title of a social status.'''
+    if num in noble_titles:
+        return noble_titles[num]
+    else:
+        return None
 
 
 def rd66():
