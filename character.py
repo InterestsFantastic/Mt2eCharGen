@@ -6,15 +6,16 @@ from copy import copy
 class Character:
     def __init__(self, gen_method='normal'):
         '''gen_method can bet set to 'boon' or 'bane' if desired.'''
-        self.gen(gen_method)
+        if gen_method is not None:
+            self.gen(gen_method)
 
-    def gen(self, gen_method):
+    def gen(self, gen_method='normal'):
         # Pick appropriate rolling function to call.
         if gen_method == 'normal':
             characteristic_diceroll = roll_normal
-        if gen_method == 'boon':
+        elif gen_method == 'boon':
             characteristic_diceroll = roll_boon
-        if gen_method == 'bane':
+        elif gen_method == 'bane':
             characteristic_diceroll = roll_bane
 
         characteristic_rolls = []
