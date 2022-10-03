@@ -2,7 +2,8 @@
 from rpgroller.roller import roll
 from random import randint
 from ODSReader.odsreader import ODSReader
-from ODSReader.utils import keyval
+from ODSReader.utils import keyval, record_reader
+from education import create_educations
 
 mechanics_file = 'mt2e_mechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
@@ -27,6 +28,10 @@ def noble_title(num):
     else:
         return None
 
+education_sheet = mechanics.getSheet('PrecareerEducation')
+educations_funcs = [str, str, int, int, int, str, int, int, int]
+educations = record_reader(education_sheet, *educations_funcs)
+educations = create_educations(educations)
 
 def rd66():
     return randint(1,6) * 10 + randint(1,6)
