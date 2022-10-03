@@ -9,6 +9,7 @@ def create_educations(educations):
 
 class Education:
     def attempt_entry(self, char):
+        '''Sets character.entered and appends to character.log.'''
         # generate DMs
         dm = 0
         if char.terms > 3:
@@ -25,13 +26,15 @@ class Education:
         logstr = f'Attempted entry into {self.name.title()}: '
         if result:
             logstr += 'Success.'
+            char.entered = True
         else:
             logstr += 'Failure.'
-
+            char.entered = False
         char.log.append(logstr)
-        return result
+        
+        return char.entered
 
-    def attempt_grad(self, char):
+    def attempt_graduate(self, char):
         # generate DMs
         dm = 0
         if char.end >= 8:
@@ -39,7 +42,20 @@ class Education:
         if char.soc >= 8:
             dm += grad_dm_soc8
 
+
         assert False, 'Need to figure out how to catch graduating with honors.'
         # characteristic_target vs. characteristic_roll?
         # change characteristic i.e. int +1 in character?
-        return char.characteristic_roll(self.grad, dm)
+        logstr = f'Attempted to graduate from {self.name.title()}: '
+        if roll >= 11:
+            logstr += 'Graduated with honors.'
+            char.graduated = 'honors'
+        elif roll >= target:
+            logstr += 'Success.'
+            char.graduated = True
+        else:
+            logstr += 'Failure.'
+            char.graduated = False
+        char.log.append(logstr)
+        
+        return char.graduated
