@@ -8,5 +8,18 @@ def create_educations(educations):
     return out
 
 class Education:
-    pass
+    def attempt_entry(self, char):
+        # generate DMs
+        dm = 0
+
+        if char.terms > 3:
+            return False
+        elif char.terms == 3:
+            dm += self.entry_dm_term3
+        elif char.terms == 2:
+            dm += self.entry_dm_term2
     
+        if char.soc >= 9:
+            dm += self.entry_dm_soc9
+
+        return char.characteristic_roll(self.entry, dm)
