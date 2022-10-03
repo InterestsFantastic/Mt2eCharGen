@@ -1,4 +1,5 @@
 def create_educations(educations):
+    '''Input: spreadsheet, output: list of Education objects.'''
     out = []
     for e in educations:
         education = Education()
@@ -35,6 +36,7 @@ class Education:
         return char.entered
 
     def attempt_graduate(self, char):
+        '''Sets character.graduated and appends to character.log.'''
         # generate DMs
         dm = 0
         if char.end >= 8:
