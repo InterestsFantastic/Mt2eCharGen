@@ -30,7 +30,6 @@ class Character:
 
     def characteristic_modifier(self, characteristic):
         '''Returns the characteristic modifier resultant from having a characteristic at a certain value, e.g. int returns 0 if character's int is 7.'''
-        # What does getattr return if attr not found?
         score = getattr(self, characteristic)
         return characteristic_modifier(score)
         
@@ -50,9 +49,6 @@ class Character:
         characteristic, target = rollparse(target)
         if characteristic in characteristic_modifiers:
             dm += self.characteristic_modifier(characteristic)
-# eventually something like this here.
-##        elif characteristic in skills:
-##            dm += self.skill[characteristic]
 
         thisroll = rollmethod()
         return thisroll + dm >= target
