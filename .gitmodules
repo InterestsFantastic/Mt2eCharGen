@@ -1,6 +1,3 @@
-[submodule "odfpy"]
-	path = odfpy
-	url = https://github.com/InterestsFantastic/odfpy.git
 [submodule "rpgroller"]
 	path = rpgroller
 	url = https://github.com/InterestsFantastic/rpgroller.git
