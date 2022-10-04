@@ -162,23 +162,37 @@ def edu8(char):
         char.gain_enemy()
         return 'Gained ally and enemy.'
 
+def edu11(char):
+    assert False, 'incomplete'
+    choosen_path = 'flee'
+    if chosen_path == 'flee':
+        can_not_graduate(char)
+        char.next_career = 'drifter'
+        return 'Fled the draft to become a drifter.'
+    else:
+        drafted = char.characteristic_roll('soc 9+')
+        if drafted:
+            can_not_graduate(char)
+            service = ['army', 'army', 'army', 'marines', 'marines', 'navy']
+            service = choice(service)
+            char.next_career = service
+            char.drafted = True
+            return f'Drafted into {service.title()}.'
 
+def edu9(char):
+    assert False, 'incomplete.'
+    chosen_skill = 'bribery'
+    assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
+    char.gain_trait(f'chosen_skill +1')
+    return f'Chose {chosen_skill}.'
 
-## 10: A newly arrived tutor rubs you up the wrong way and you work hard to
-##overturn their conclusions. Roll 9+ on any skill you have learned
-##during this term. If successful, you provide a truly elegant proof
-##that soon becomes accepted as the standard approach. Gain a level
-##in the skill you rolled on and the tutor as a Rival.
-
-## 11. War comes and a wide-ranging draft is instigated. You can either flee and
-##join the Drifter career next term or be drafted
-##(roll 1D: 1-3 Army, 4-5 Marine, 6 Navy). Either way, you do not graduate
-##this term. However, if you roll SOC 9+, you can get enough strings pulled
-##to avoid the draft and complete your education – you may attempt graduation
-##normally and are not drafted.
-
-# 9: You develop a healthy interest in a hobby or other area of study.
-# Gain any skill of your choice, with the exception of Jack-of-all-Trades,
-# at level 0.
-
+def edu10(char):
+    assert False, 'incomplete.'
+    chosen_skill = 'bribery'
+    newproof = char.characteristic_roll(f'{chosen_skill} 9+')
+    if newproof:
+        char.gain_trait(f'chosen_skill +1')
+        char.gain_rival()
+        return 'Gained a level in {chosen_skill}.'
+        
 # 7: Life Event. Roll on the Life Events table (see page 44).
