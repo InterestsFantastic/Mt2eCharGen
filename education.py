@@ -87,8 +87,31 @@ class LifeEvent:
         self.desc = desc
     def run(self, char):
         logstr = f'Life Event: {self.desc}'
-        assert False, 'Figure out how to pick self.happen method programatically.'
-        self.happen = edu2
+
+        eventnum = roll_normal()
+        if eventnum == 2:
+            self.happen = edu2
+        elif eventnum == 3:
+            self.happen = edu3
+        elif eventnum == 4:
+            self.happen = edu4
+        elif eventnum == 5:
+            self.happen = edu5
+        elif eventnum == 6:
+            self.happen = edu6
+        elif eventnum == 7:
+            self.happen = edu7
+        elif eventnum == 8:
+            self.happen = edu8
+        elif eventnum == 9:
+            self.happen = edu9
+        elif eventnum == 10:
+            self.happen = edu10
+        elif eventnum == 11:
+            self.happen = edu11
+        elif eventnum == 12:
+            self.happen = edu12
+
         result = self.happen(char)
         if result is not None:
             logstr += f' {result}'
