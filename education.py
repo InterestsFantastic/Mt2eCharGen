@@ -51,6 +51,11 @@ class Education:
 
     def attempt_graduate(self, char):
         '''Sets character.graduated and appends to character.log.'''
+        if not char.can_graduate:
+            # Flip back to true for next career
+            char.can_graduate = True
+            return False
+
         # generate DMs
         dm = 0
         if char.end >= 8:
@@ -76,9 +81,45 @@ class Education:
         
         return char.graduated
 
+
 class LifeEvent:
     def __init__(self, desc):
         self.desc = desc
     def run(self, char):
-        char.log.append(f'Life Event: {self.desc}')
+        logstr = f'Life Event: {self.desc}'
+        result = self.happen()
+        if result is not None:
+            logstr += f' {result}'
+        char.log.append(logstr)
+
+def can_not_graduate(char):
+    char.can_graduate = False
+    
+def can_test_psi(char):
+    char.can_test_psi = True
+    
+def edu2(self, char):
+    can_test_psi(char)
+
+def edu3(self, char):
+    can_not_graduate(char)
+
+def edu4(self, char):
+    # I need to set up the character attribute vs. target roll here.
+    # Rename it or whatever I'm going to do, before proceeding.
+    roll = roll_normal()
+    if roll == 2:
+        # The player can not achieve 8+ with a roll of 2.
+        char.next_career = 'prison'
+        can_not_graduate(char)
+        char.gain_enemy()
+        return 'Gained enemy, can not graduate, and next career is Prison.'
+    assert False, 'incomplete.'
+    # I'm doing the same check as if I were doing the graduating with honors thing.
+##    if char.cond('soc 8+'):
+##        char.gain_rival()
+##        return 'Gained rival.'
+##    else:
+##        char.gain_enemy()
+##        return 'Gained enemy.'
 
