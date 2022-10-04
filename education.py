@@ -1,4 +1,4 @@
-from mt2e_mechanics import roll_normal
+from mt2erolls import roll_normal
 
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
 events_labels = events_labels.split()
@@ -12,7 +12,7 @@ def create_educations(educations):
         for (k,v) in e.items():
             if k in events_labels:
                 # Creating events dict with int labels for rolling on.
-                events[int(k.split('_')[1])] = v
+                events[int(k.split('_')[1])] = LifeEvent(v)
             else:
                 setattr(education, k, v)
         setattr(education, 'events', events)
@@ -81,4 +81,4 @@ class LifeEvent:
         self.desc = desc
     def run(self, char):
         char.log.append(f'Life Event: {self.desc}')
-        
+
