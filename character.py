@@ -39,23 +39,32 @@ class Character:
         else:
             assert False, f'skill is being searched for? {characteristic}'
 
-    def characteristic_roll(self, target, dm=0, rollmethod = 'normal'):
+    def characteristic_roll(self, target, dm=0, rollmethod='normal', extras=None):
         '''Rolls dice against a target using characteristic OR skill modifier.
         In the case of the latter, useful mostly during career progression.
         Will handle rolltype 'boon' and 'bane'.
-        The assumption is that all rolls will be +'''
+        The assumption is that all rolls will be +
+        Normally the function returns only pass/fail but if you argue
+        'modified' in extras you will get the final roll as well, and
+        'unmodified' will return the base roll.'''
         rollmethod = pick_roll_method(rollmethod)
 
         # Splits characteristic and target number and removes the + at the end.
         characteristic, target = rollparse(target)
-        dm = 0
         if characteristic in characteristics:
             dm += self.characteristic_modifier(characteristic)
         else:
             assert False, f'skill is being searched for? {characteristic}'
 
         thisroll = rollmethod()
-        return thisroll + dm >= target
+        if extras is None:
+            return thisroll + dm >= target
+        elif extras == 'modified':
+            return thisroll + dm >= target, thisroll + dm
+        elif extras == 'unmodified':
+            return thisroll + dm >= target, thisroll
+        else:
+            assert False, f'unknown extras specification {extras}'
                 
     def print_characteristics(self):
         print(self.str, self.dex, self.end, self.int, self.edu, self.soc)
