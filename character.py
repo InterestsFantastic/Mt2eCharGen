@@ -15,6 +15,7 @@ class Character:
         self.terms=1
         self.can_test_psi = False
         self.next_career = None
+        self.drafted = False
         self.allies = []
         self.rivals = []
         self.enemies = []
