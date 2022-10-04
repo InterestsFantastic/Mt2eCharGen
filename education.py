@@ -15,7 +15,7 @@ def create_educations(educations):
                 # Creating events dict with int labels for rolling on.
                 event, num  = k.split('_')
                 num = int(num)
-                events[num] = LifeEvent(event, num)
+                events[num] = LifeEvent(v, num)
             else:
                 setattr(education, k, v)
         setattr(education, 'events', events)
@@ -64,14 +64,13 @@ class Education:
         dm += char.check_characteristic('end 8+') * self.grad_dm_end8
         dm += char.check_characteristic('soc 8+') * self.grad_dm_soc8
 
-        assert False, 'Need to figure out how to catch graduating with honors.'
-        # characteristic_target vs. characteristic_roll?
-        # change characteristic i.e. int +1 in character?
         logstr = f'Attempted to graduate from {self.name.title()}: '
-        if thisroll >= 11:
+
+        grad_result = char.characteristic_roll(self.grad, extras='modified')
+        if grad_result[1] >= 11:
             logstr += 'Graduated with honors.'
             char.graduated = 'honors'
-        elif thisroll >= target:
+        elif grad_result[0]:
             logstr += 'Success.'
             char.graduated = True
         else:
@@ -83,12 +82,14 @@ class Education:
 
 
 class LifeEvent:
-    def __init__(self, desc, num):
+    def __init__(self, desc, num, short='edu'):
         self.num = num
         self.desc = desc
     def run(self, char):
         logstr = f'Life Event: {self.desc}'
-        result = self.happen()
+        assert False, 'Figure out how to pick self.happen method programatically.'
+        self.happen = edu2
+        result = self.happen(char)
         if result is not None:
             logstr += f' {result}'
         char.log.append(logstr)
@@ -99,19 +100,19 @@ def can_not_graduate(char):
 def can_test_psi(char):
     char.can_test_psi = True
     
-def edu2(self, char):
+def edu2(char):
     can_test_psi(char)
 
-def edu3(self, char):
+def edu3(char):
     can_not_graduate(char)
 
-def edu6(self, char):
+def edu6(char):
     thisroll = roll('1d3')
     for x in range(thisroll):
         char.gain_ally()
     return f'Gained {thisroll} allies.'
 
-def edu4(self, char):
+def edu4(char):
     # I need to set up the character attribute vs. target roll here.
     # Rename it or whatever I'm going to do, before proceeding.
     thisroll = roll_normal()
