@@ -64,4 +64,3 @@ if __name__ == '__main__':
     print(c.log)
     
 
-print('hello world') #testing github stuff
