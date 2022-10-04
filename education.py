@@ -15,7 +15,7 @@ def create_educations(educations):
                 # Creating events dict with int labels for rolling on.
                 event, num  = k.split('_')
                 num = int(num)
-                events[num] = LifeEvent(v, num)
+                events[num] = CareerEvent(v, num)
             else:
                 setattr(education, k, v)
         setattr(education, 'events', events)
@@ -81,7 +81,7 @@ class Education:
         return char.graduated
 
 
-class LifeEvent:
+class CareerEvent:
     def __init__(self, desc, num, short='edu'):
         self.num = num
         self.desc = desc
