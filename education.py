@@ -1,5 +1,5 @@
 from mt2erolls import roll_normal
-from rpg_roller import roll
+from rpgroller.roller import roll
 
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
 events_labels = events_labels.split()
@@ -13,7 +13,7 @@ def create_educations(educations):
         for (k,v) in e.items():
             if k in events_labels:
                 # Creating events dict with int labels for rolling on.
-                num, event = k.split('_')
+                event, num  = k.split('_')
                 num = int(num)
                 events[num] = LifeEvent(event, num)
             else:
@@ -83,7 +83,8 @@ class Education:
 
 
 class LifeEvent:
-    def __init__(self, desc):
+    def __init__(self, desc, num):
+        self.num = num
         self.desc = desc
     def run(self, char):
         logstr = f'Life Event: {self.desc}'
