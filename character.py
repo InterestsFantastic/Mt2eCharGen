@@ -11,6 +11,8 @@ class Character:
 
     def gen(self, gen_method='normal'):
         self.terms=1
+        self.can_test_psi = False
+        self.next_career = None
         self.log = []
 
         # Pick appropriate rolling function to call.        
