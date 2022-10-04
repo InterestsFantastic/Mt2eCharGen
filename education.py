@@ -136,35 +136,33 @@ def edu6(char):
     return f'Gained {thisroll} allies.'
 
 def edu4(char):
-    # I need to set up the character attribute vs. target roll here.
-    # Rename it or whatever I'm going to do, before proceeding.
-    thisroll = roll_normal()
-    if thisroll == 2:
-        # The player can not achieve 8+ with a roll of 2.
+    event_result = char.characteristic_roll('soc 8+', extras='unmodified')
+    if event_result[1] == 2:
         char.next_career = 'prison'
         can_not_graduate(char)
         char.gain_enemy()
         return 'Gained enemy, can not graduate, and next career is Prison.'
-    assert False, 'incomplete.'
-    # I'm doing the same check as if I were doing the graduating with honors thing.
-##    if char.cond('soc 8+'):
-##        char.gain_rival()
-##        return 'Gained rival.'
-##    else:
-##        char.gain_enemy()
-##        return 'Gained enemy.'
+    if event_result[0]:
+        char.gain_rival()
+        return 'Gained rival.'
+    else:
+        char.gain_enemy()
+        return 'Gained enemy.'
 
-# 5 Taking advantage of youth, you party as much as you study. Gain Carouse 1.
+def edu5(char):
+    char.gain_trait('Carouse +1')
 
-# 7: Life Event. Roll on the Life Events table (see page 44).
+def edu12(char):
+    char.gain_trait('soc +1')
 
-# 8: You join a political movement. Roll SOC 8+. If successful, you become a
-# leading figure. Gain one Ally within the movement but gain one Enemy in
-# wider society.
+def edu8(char):
+    event_result = char.characteristic_roll('soc 8+')
+    if event_result:
+        char.gain_ally()
+        char.gain_enemy()
+        return 'Gained ally and enemy.'
 
-# 9: You develop a healthy interest in a hobby or other area of study.
-# Gain any skill of your choice, with the exception of Jack-of-all-Trades,
-# at level 0.
+
 
 ## 10: A newly arrived tutor rubs you up the wrong way and you work hard to
 ##overturn their conclusions. Roll 9+ on any skill you have learned
@@ -179,5 +177,8 @@ def edu4(char):
 ##to avoid the draft and complete your education – you may attempt graduation
 ##normally and are not drafted.
 
-## 12. You gain wide-ranging recognition of your initiative and innovative
-##approach to study. Increase your SOC by +1.
+# 9: You develop a healthy interest in a hobby or other area of study.
+# Gain any skill of your choice, with the exception of Jack-of-all-Trades,
+# at level 0.
+
+# 7: Life Event. Roll on the Life Events table (see page 44).
