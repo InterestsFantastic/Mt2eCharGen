@@ -26,3 +26,14 @@ def roll_boon():
 
 def roll_bane():
     return roll('3d6kl2')
+
+def pick_roll_method(rolltype='normal'):
+    '''rolltype can bet set to 'boon' or 'bane' if desired.'''
+    if rolltype == 'normal':
+        return roll_normal
+    elif rolltype == 'boon':
+        return roll_boon
+    elif rolltype == 'bane':
+        return roll_bane
+
+    
