@@ -15,6 +15,9 @@ class Character:
         self.terms=1
         self.can_test_psi = False
         self.next_career = None
+        self.allies = []
+        self.rivals = []
+        self.enemies = []
         self.log = []
 
         gen_method = pick_roll_method(gen_method)
@@ -26,6 +29,13 @@ class Character:
         self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(characteristic_rolls)
 
 
+    def gain_ally(self):
+        self.allies.append('I')
+    def gain_rival(self):
+        self.rivals.append('I')
+    def gain_enemy(self):
+        self.enemies.append('I')
+        
     def characteristic_modifier(self, characteristic):
         '''Returns the characteristic modifier resultant from having a characteristic at a certain value, e.g. int returns 0 if character's int is 7.'''
         score = getattr(self, characteristic)
