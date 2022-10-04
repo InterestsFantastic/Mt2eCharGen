@@ -3,7 +3,7 @@ from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval, record_reader
 from education import create_educations
 
-mechanics_file = 'mt2e_mechanics.ods'
+mechanics_file = 'mt2emechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
 characteristic_modifiers = mechanics.getSheet('CharacteristicModifiers')

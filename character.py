@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from mt2erolls import roll_normal, roll_boon, roll_bane, rollparse
-from mt2e_mechanics import  characteristic_modifier, educations, characteristic_modifiers
+from mt2emechanics import  characteristic_modifier, educations, characteristic_modifiers
 from copy import copy
 
 class Character:
