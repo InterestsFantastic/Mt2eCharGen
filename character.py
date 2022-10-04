@@ -35,6 +35,14 @@ class Character:
         score = getattr(self, characteristic)
         return characteristic_modifier(score)
         
+    def check_characteristic(self, target):
+        '''Checks to see if character has e.g. 'int 8+'.'''
+        characteristic, target = rollparse(target)
+        if characteristic in characteristic_modifiers:
+            return getattr(self, characteristic) >= target
+        else:
+            assert False, 'skill is being searched for?'
+
     def characteristic_roll(self, target, dm=0, rolltype = 'normal'):
         '''Rolls dice against a target using characteristic OR skill modifier.
         In the case of the latter, useful mostly during career progression.
@@ -51,6 +59,8 @@ class Character:
         characteristic, target = rollparse(target)
         if characteristic in characteristic_modifiers:
             dm += self.characteristic_modifier(characteristic)
+        else:
+            assert False, 'skill is being searched for?'
 
         thisroll = rollmethod()
         return thisroll + dm >= target
