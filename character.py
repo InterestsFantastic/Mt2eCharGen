@@ -1,7 +1,9 @@
 #!/usr/bin/python3
-from mt2erolls import roll_normal, roll_boon, roll_bane, rollparse
+from mt2erolls import roll_normal, roll_boon, roll_bane, pick_roll_method, rollparse
 from mt2emechanics import  characteristic_modifier, educations, characteristic_modifiers
 from copy import copy
+
+characteristics = 'str dex end int edu soc'.split()
 
 class Character:
     def __init__(self, gen_method='normal'):
@@ -15,17 +17,11 @@ class Character:
         self.next_career = None
         self.log = []
 
-        # Pick appropriate rolling function to call.        
-        if gen_method == 'normal':
-            characteristic_diceroll = roll_normal
-        elif gen_method == 'boon':
-            characteristic_diceroll = roll_boon
-        elif gen_method == 'bane':
-            characteristic_diceroll = roll_bane
+        gen_method = pick_roll_method(gen_method)
 
         characteristic_rolls = []
         for x in range(6):
-            characteristic_rolls.append(characteristic_diceroll())
+            characteristic_rolls.append(gen_method())
         # copy may be unnecessary here.
         self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(characteristic_rolls)
 
@@ -38,29 +34,25 @@ class Character:
     def check_characteristic(self, target):
         '''Checks to see if character has e.g. 'int 8+'.'''
         characteristic, target = rollparse(target)
-        if characteristic in characteristic_modifiers:
+        if characteristic in characteristics:
             return getattr(self, characteristic) >= target
         else:
-            assert False, 'skill is being searched for?'
+            assert False, f'skill is being searched for? {characteristic}'
 
-    def characteristic_roll(self, target, dm=0, rolltype = 'normal'):
+    def characteristic_roll(self, target, dm=0, rollmethod = 'normal'):
         '''Rolls dice against a target using characteristic OR skill modifier.
         In the case of the latter, useful mostly during career progression.
         Will handle rolltype 'boon' and 'bane'.
         The assumption is that all rolls will be +'''
-        # Pick appropriate rolling function to call.
-        rollmethod = roll_normal
-        if rolltype == 'boon':
-            rollmethod = roll_boon
-        elif rolltype == 'bane':
-            rollemethod = roll_bane
+        rollmethod = pick_roll_method(rollmethod)
 
         # Splits characteristic and target number and removes the + at the end.
         characteristic, target = rollparse(target)
-        if characteristic in characteristic_modifiers:
+        dm = 0
+        if characteristic in characteristics:
             dm += self.characteristic_modifier(characteristic)
         else:
-            assert False, 'skill is being searched for?'
+            assert False, f'skill is being searched for? {characteristic}'
 
         thisroll = rollmethod()
         return thisroll + dm >= target
