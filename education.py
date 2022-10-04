@@ -1,3 +1,5 @@
+from mt2e_mechanics import roll_normal
+
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
 events_labels = events_labels.split()
 
@@ -41,7 +43,10 @@ class Education:
             logstr += 'Failure.'
             char.entered = False
         char.log.append(logstr)
-        
+
+        if char.entered:
+            # run event if successful entry.
+            self.events[roll_normal()].run(char)
         return char.entered
 
     def attempt_graduate(self, char):
@@ -70,3 +75,10 @@ class Education:
         char.log.append(logstr)
         
         return char.graduated
+
+class LifeEvent:
+    def __init__(self, desc):
+        self.desc = desc
+    def run(self, char):
+        char.log.append(f'Life Event: {self.desc}')
+        
