@@ -97,17 +97,12 @@ class CareerEvent:
             logstr += f' {result}'
         char.log.append(logstr)
 
-def can_not_graduate(char):
-    char.can_graduate = False
-    
-def can_test_psi(char):
-    char.can_test_psi = True
     
 def edu2(char):
-    can_test_psi(char)
+    char.can_test_psi = True
 
 def edu3(char):
-    can_not_graduate(char)
+    char.can_graduate = False
 
 def edu6(char):
     thisroll = roll('1d3')
@@ -119,7 +114,7 @@ def edu4(char):
     event_result = char.characteristic_roll('soc 8+', extras='unmodified')
     if event_result[1] == 2:
         char.next_career = 'prison'
-        can_not_graduate(char)
+        char.can_graduate = False
         char.gain_enemy()
         return 'Gained enemy, can not graduate, and next career is Prison.'
     if event_result[0]:
@@ -146,13 +141,13 @@ def edu11(char):
     assert False, 'incomplete'
     choosen_path = 'flee'
     if chosen_path == 'flee':
-        can_not_graduate(char)
+        char.can_graduate = False
         char.next_career = 'drifter'
         return 'Fled the draft to become a drifter.'
     else:
         drafted = char.characteristic_roll('soc 9+')
         if drafted:
-            can_not_graduate(char)
+            char.can_graduate = False
             service = ['army', 'army', 'army', 'marines', 'marines', 'navy']
             service = choice(service)
             char.next_career = service
