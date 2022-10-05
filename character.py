@@ -58,7 +58,6 @@ class Character:
         Normally the function returns only pass/fail but if you argue
         'modified' in extras you will get the final roll as well, and
         'unmodified' will return the base roll.'''
-        rollmethod = pick_roll_method(rollmethod)
 
         # Splits characteristic and target number and removes the + at the end.
         characteristic, target = rollparse(target)
@@ -66,8 +65,8 @@ class Character:
             dm += self.characteristic_modifier(characteristic)
         else:
             assert False, f'skill is being searched for? {characteristic}'
-
-        thisroll = rollmethod()
+        
+        thisroll = pick_roll_method(rollmethod)()
         if extras is None:
             return thisroll + dm >= target
         elif extras == 'modified':
