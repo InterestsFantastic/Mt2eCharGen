@@ -15,7 +15,9 @@ def create_educations(educations):
                 # Creating events dict with int labels for rolling on.
                 event, num  = k.split('_')
                 num = int(num)
-                events[num] = CareerEvent(v, num)
+                event = CareerEvent(v, num)
+                event.happen = globals()[event.career_event_short + str(event.num)]
+                events[num] = event
             else:
                 setattr(education, k, v)
         setattr(education, 'events', events)
@@ -82,36 +84,14 @@ class Education:
 
 
 class CareerEvent:
-    def __init__(self, desc, num, short='edu'):
+    def __init__(self, desc, num, career_event_short='edu'):
         self.num = num
         self.desc = desc
+        self.career_event_short = career_event_short
+        
     def run(self, char):
+        '''Run and log life event.'''
         logstr = f'Life Event: {self.desc}'
-
-        eventnum = roll_normal()
-        if eventnum == 2:
-            self.happen = edu2
-        elif eventnum == 3:
-            self.happen = edu3
-        elif eventnum == 4:
-            self.happen = edu4
-        elif eventnum == 5:
-            self.happen = edu5
-        elif eventnum == 6:
-            self.happen = edu6
-        elif eventnum == 7:
-            self.happen = edu7
-        elif eventnum == 8:
-            self.happen = edu8
-        elif eventnum == 9:
-            self.happen = edu9
-        elif eventnum == 10:
-            self.happen = edu10
-        elif eventnum == 11:
-            self.happen = edu11
-        elif eventnum == 12:
-            self.happen = edu12
-
         result = self.happen(char)
         if result is not None:
             logstr += f' {result}'
@@ -179,6 +159,10 @@ def edu11(char):
             char.drafted = True
             return f'Drafted into {service.title()}.'
 
+def edu7(char):
+    # 7: Life Event. Roll on the Life Events table (see page 44).
+    assert False, 'incomplete'
+
 def edu9(char):
     assert False, 'incomplete.'
     chosen_skill = 'bribery'
@@ -194,5 +178,3 @@ def edu10(char):
         char.gain_trait(f'chosen_skill +1')
         char.gain_rival()
         return 'Gained a level in {chosen_skill}.'
-        
-# 7: Life Event. Roll on the Life Events table (see page 44).
