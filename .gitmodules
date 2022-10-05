@@ -7,3 +7,6 @@
 [submodule "inflect"]
 	path = inflect
 	url = https://github.com/InterestsFantastic/inflect.git
+[submodule "ODSReader"]
+	path = ODSReader
+	url = https://github.com/InterestsFantastic/read-ods-with-odfpy.git
