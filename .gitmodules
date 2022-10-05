@@ -4,3 +4,6 @@
 [submodule "TravellerLetterNumbers"]
 	path = TravellerLetterNumbers
 	url = https://github.com/InterestsFantastic/TravellerDiceLetterNumbers.git
+[submodule "inflect"]
+	path = inflect
+	url = https://github.com/InterestsFantastic/inflect.git

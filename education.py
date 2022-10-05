@@ -82,7 +82,6 @@ class Education:
         
         return char.graduated
 
-
 class CareerEvent:
     def __init__(self, desc, num, career_event_short='edu'):
         self.num = num
@@ -97,7 +96,6 @@ class CareerEvent:
             logstr += f' {result}'
         char.log.append(logstr)
 
-    
 def edu2(char):
     char.can_test_psi = True
 
