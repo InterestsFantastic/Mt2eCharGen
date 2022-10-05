@@ -104,12 +104,6 @@ def edu2(char):
 def edu3(char):
     char.can_graduate = False
 
-def edu6(char):
-    thisroll = roll('1d3')
-    for x in range(thisroll):
-        char.gain_ally()
-    return f'Gained {thisroll} allies.'
-
 def edu4(char):
     event_result = char.characteristic_roll('soc 8+', extras='unmodified')
     if event_result[1] == 2:
@@ -127,8 +121,31 @@ def edu4(char):
 def edu5(char):
     char.gain_trait('Carouse +1')
 
-def edu12(char):
-    char.gain_trait('soc +1')
+def edu6(char):
+    thisroll = roll('1d3')
+    for x in range(thisroll):
+        char.gain_ally()
+    return f'Gained {thisroll} allies.'
+
+def edu7(char):
+    # 7: Life Event. Roll on the Life Events table (see page 44).
+    assert False, 'incomplete'
+
+def edu9(char):
+    assert False, 'incomplete.'
+    chosen_skill = 'bribery'
+    assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
+    char.gain_trait(f'chosen_skill +1')
+    return f'Chose {chosen_skill}.'
+
+def edu10(char):
+    assert False, 'incomplete.'
+    chosen_skill = 'bribery'
+    newproof = char.characteristic_roll(f'{chosen_skill} 9+')
+    if newproof:
+        char.gain_trait(f'chosen_skill +1')
+        char.gain_rival()
+        return 'Gained a level in {chosen_skill}.'
 
 def edu8(char):
     event_result = char.characteristic_roll('soc 8+')
@@ -154,22 +171,6 @@ def edu11(char):
             char.drafted = True
             return f'Drafted into {service.title()}.'
 
-def edu7(char):
-    # 7: Life Event. Roll on the Life Events table (see page 44).
-    assert False, 'incomplete'
+def edu12(char):
+    char.gain_trait('soc +1')
 
-def edu9(char):
-    assert False, 'incomplete.'
-    chosen_skill = 'bribery'
-    assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
-    char.gain_trait(f'chosen_skill +1')
-    return f'Chose {chosen_skill}.'
-
-def edu10(char):
-    assert False, 'incomplete.'
-    chosen_skill = 'bribery'
-    newproof = char.characteristic_roll(f'{chosen_skill} 9+')
-    if newproof:
-        char.gain_trait(f'chosen_skill +1')
-        char.gain_rival()
-        return 'Gained a level in {chosen_skill}.'
