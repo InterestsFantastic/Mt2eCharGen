@@ -1,5 +1,8 @@
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
+import inflect
+
+inflection = inflect.engine()
 
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
 events_labels = events_labels.split()
@@ -123,7 +126,7 @@ def edu6(char):
     thisroll = roll('1d3')
     for x in range(thisroll):
         char.gain_ally()
-    return f'Gained {thisroll} allies.'
+    return f'Gained {thisroll} {inflection.plural("ally", thisroll)}.'
 
 def edu7(char):
     # 7: Life Event. Roll on the Life Events table (see page 44).
