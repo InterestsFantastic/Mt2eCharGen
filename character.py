@@ -6,6 +6,7 @@ from copy import copy
 characteristics = 'str dex end int edu soc'.split()
 
 def parse_gain_skill(desc):
+    assert False, 'ensure that skill is in skill list here.'
     '''Helper for Character.gain_skill
     Splits 'carouse 1' into ('carouse', '=', 1).
     Splits 'carouse +1' into ('carouse', '+'.'''
@@ -29,11 +30,11 @@ class Character:
         desc examples: carouse 0, carouse 1, carouse +1'''
         skill, mod, val = parse_gain_skill(desc)
         if mod == '=':
-            if self.skills[skill] is None or self.skills[skill] < val:
+            if skill not in self.skills or self.skills[skill] < val:
                 # Will not reduce a skill.
                 self.skills[skill] = val
         elif mod == '+':
-            if self.skills[skill] is None:
+            if skill not in self.skills:
                 self.skills[skill] = val
             else:
                 self.skills[skill] += val
