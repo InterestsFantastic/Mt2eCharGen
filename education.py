@@ -120,7 +120,7 @@ def edu4(char):
         return 'Gained enemy.'
 
 def edu5(char):
-    char.gain_trait('Carouse +1')
+    char.gain_skill('Carouse +1')
 
 def edu6(char):
     thisroll = roll('1d3')
@@ -136,7 +136,7 @@ def edu9(char):
     assert False, 'incomplete.'
     chosen_skill = 'bribery'
     assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
-    char.gain_trait(f'chosen_skill +1')
+    char.gain_skill(f'chosen_skill +1')
     return f'Chose {chosen_skill}.'
 
 def edu10(char):
@@ -144,7 +144,7 @@ def edu10(char):
     chosen_skill = 'bribery'
     newproof = char.characteristic_roll(f'{chosen_skill} 9+')
     if newproof:
-        char.gain_trait(f'chosen_skill +1')
+        char.gain_skill(f'chosen_skill +1')
         char.gain_rival()
         return 'Gained a level in {chosen_skill}.'
 
@@ -173,5 +173,5 @@ def edu11(char):
             return f'Drafted into {service.title()}.'
 
 def edu12(char):
-    char.gain_trait('soc +1')
+    char.soc += 1
 
