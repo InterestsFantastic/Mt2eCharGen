@@ -5,11 +5,40 @@ from copy import copy
 
 characteristics = 'str dex end int edu soc'.split()
 
+def parse_gain_skill(desc):
+    '''Helper for Character.gain_skill
+    Splits 'carouse 1' into ('carouse', '=', 1).
+    Splits 'carouse +1' into ('carouse', '+'.'''
+    skill, rest = desc.split()
+    if rest[0] == '+':
+        mod = '+'
+        rest = rest[1:]
+    else:
+        mod = '='
+    val = int(rest)
+    return skill, mod, val
+
 class Character:
     def __init__(self, gen_method='normal'):
         '''gen_method can bet set to 'boon' or 'bane' if desired.'''
         if gen_method is not None:
             self.gen(gen_method)
+
+    def gain_skill(self, desc):
+        '''Character gains a skill.
+        desc examples: carouse 0, carouse 1, carouse +1'''
+        skill, mod, val = parse_gain_skill(desc)
+        if mod == '=':
+            if self.skills[skill] is None or self.skills[skill] < val:
+                # Will not reduce a skill.
+                self.skills[skill] = val
+        elif mod == '+':
+            if self.skills[skill] is None:
+                self.skills[skill] = val
+            else:
+                self.skills[skill] += val
+        else:
+            assert False, f'Unknown modifier for gaining a skill: {mod}'
 
     def gen(self, gen_method='normal'):
         self.terms=1
