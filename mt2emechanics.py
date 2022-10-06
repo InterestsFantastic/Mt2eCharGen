@@ -33,3 +33,22 @@ educations_funcs = [str, str, int, int, int, str, int, int, int]
 educations = record_reader(education_sheet, *educations_funcs)
 educations = create_educations(educations)
 
+skills_sheet = mechanics.getSheet('Skills')
+skills = record_reader(skills_sheet)
+print(skills)
+
+skills_list = []
+for skill in skills:
+    # House rulse!
+    if 'cascade' not in skill:
+        skills_list.append(skill['skill'])
+    elif not skill['cascade']:
+        skills_list.append(skill['skill'])
+print(skills_list)
+
+# I believe this is incorrect pluralization.
+skills_aliases = {}
+for skill in skills_list:
+    if 'short' in skills[skill]:
+        skills_aliases[skills[skill].short] = skill
+print(skills_aliases)
