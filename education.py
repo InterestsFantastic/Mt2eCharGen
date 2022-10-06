@@ -120,7 +120,7 @@ def edu4(char):
         return 'Gained enemy.'
 
 def edu5(char):
-    char.gain_skill('Carouse +1')
+    char.gain_skill('carouse +1')
 
 def edu6(char):
     thisroll = roll('1d3')
