@@ -42,3 +42,12 @@ for skill in skills:
     if skill['short'] is not None:
         skills_aliases[skill['short']] = skill["skill"]
     skills_list.append(skill['skill'])
+
+def get_skill_name(skill):
+    '''Returns the full form of a skill name from its alias (or skill name).'''
+    if skill in skills_list:
+        return skill
+    elif skill in skills_aliases:
+        return skills_aliases[skill]
+    else:
+        assert False, f'Skill not found: {skill}.'
