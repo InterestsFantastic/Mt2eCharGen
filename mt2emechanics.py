@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from ODSReader.odsreader import ODSReader
-from ODSReader.utils import keyval, record_reader
+from ODSReader.utils import keyval, rows_to_list_of_dicts
 from education import create_educations
 
 mechanics_file = 'mt2emechanics.ods'
@@ -30,14 +30,13 @@ def noble_title(num):
 
 education_sheet = mechanics.getSheet('PrecareerEducation')
 educations_funcs = [str, str, int, int, int, str, int, int, int]
-educations = record_reader(education_sheet, *educations_funcs)
+educations = rows_to_list_of_dicts(education_sheet, *educations_funcs)
 educations = create_educations(educations)
 
 skills_sheet = mechanics.getSheet('Skills')
-skills = record_reader(skills_sheet)
+skills = rows_to_list_of_dicts(skills_sheet)
 print(skills)
 
-# I believe this is incorrect pluralization.
 skills_aliases = {}
 skills_list = []
 for skill in skills:
