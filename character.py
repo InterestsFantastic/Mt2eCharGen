@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 from mt2erolls import roll_normal, roll_boon, roll_bane, pick_roll_method, rollparse
 from mt2emechanics import  characteristic_modifier, educations, characteristic_modifiers
-from copy import copy
 
 characteristics = 'str dex end int edu soc'.split()
 
@@ -56,8 +55,7 @@ class Character:
         characteristic_rolls = []
         for x in range(6):
             characteristic_rolls.append(gen_method())
-        # copy may be unnecessary here.
-        self.str, self.dex, self.end, self.int, self.edu, self.soc = copy(characteristic_rolls)
+        self.str, self.dex, self.end, self.int, self.edu, self.soc = characteristic_rolls
 
 
     def gain_ally(self):
