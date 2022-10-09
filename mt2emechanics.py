@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from ODSReader.odsreader import ODSReader
-from ODSReader.utils import dict_sheet_to_dict, rows_to_list_of_dicts
+from ODSReader.utils import dict_sheet_to_dict, rows_to_list_of_dicts, dict_of_dicts_from_list_of_dicts
 from education import create_educations
 
 mechanics_file = 'mt2emechanics.ods'
@@ -35,17 +35,15 @@ educations = create_educations(educations)
 
 skills_sheet = mechanics.getSheet('Skills')
 skills = rows_to_list_of_dicts(skills_sheet)
-
+skills = dict_of_dicts_from_list_of_dicts('skill', skills)
 skills_aliases = {}
-skills_list = []
 for skill in skills:
-    if skill['short'] is not None:
-        skills_aliases[skill['short']] = skill["skill"]
-    skills_list.append(skill['skill'])
+    if skills[skill]['short'] is not None:
+        skills_aliases[skills[skill]['short']] = skill
 
 def get_skill_name(skill):
     '''Returns the full form of a skill name from its alias (or skill name).'''
-    if skill in skills_list:
+    if skill in skills:
         return skill
     elif skill in skills_aliases:
         return skills_aliases[skill]
