@@ -35,14 +35,10 @@ educations = create_educations(educations)
 
 skills_sheet = mechanics.getSheet('Skills')
 skills = rows_to_list_of_dicts(skills_sheet)
-print(skills)
 
 skills_aliases = {}
 skills_list = []
 for skill in skills:
-    if 'short' in skills[skill]:
-        skills_aliases[skills[skill].short] = skill
-    skills_list.append(skills[skill].skill)
-
-print(skills_list)
-print(skills_aliases)
+    if skill['short'] is not None:
+        skills_aliases[skill['short']] = skill["skill"]
+    skills_list.append(skill['skill'])
