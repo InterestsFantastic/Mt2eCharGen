@@ -29,7 +29,7 @@ def noble_title(num):
         return None
 
 ##education_sheet = mechanics.getSheet('PrecareerEducation')
-educations_funcs = [str, str, int, int, int, str, int, int, int]
+educations_funcs = [str, None, str, int, int, int, str, int, int, int]
 educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
 print(educations)
 educations = create_educations(educations)
