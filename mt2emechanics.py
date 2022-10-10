@@ -3,6 +3,8 @@ from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval_sheet_to_dict, rows_to_list_of_dicts, dict_of_dicts_from_list_of_dicts, dict_sheet_to_dict_of_dicts
 from education import create_educations
 
+non_proficiency_penalty = -3
+
 mechanics_file = 'mt2emechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
