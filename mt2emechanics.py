@@ -28,10 +28,13 @@ def noble_title(num):
     else:
         return None
 
-education_sheet = mechanics.getSheet('PrecareerEducation')
+##education_sheet = mechanics.getSheet('PrecareerEducation')
 educations_funcs = [str, str, int, int, int, str, int, int, int]
-educations = rows_to_list_of_dicts(education_sheet, *educations_funcs)
+educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
+print(educations)
 educations = create_educations(educations)
+##educations = rows_to_list_of_dicts(education_sheet, *educations_funcs)
+##educations = create_educations(educations)
 
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
 skills_aliases = {}
