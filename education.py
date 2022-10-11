@@ -143,10 +143,8 @@ def edu8(char):
 ##Gain any skill of your choice, with the exception of Jack-of-all-Trades,
 ##at level 0.
 def edu9(char):
-##    assert False, 'incomplete.'
-##    chosen_skill = 'bribery'
-##    assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
-    chosen_skill = char.agent.choose_skill('s')
+    assert False, 'incomplete.' # figure out how to structure program!
+    chosen_skill = char.agent.choose_skill('s', 'joat') # e.g. how to find s!
     char.gain_skill(f'chosen_skill +1')
     return f'Chose {chosen_skill}.'
 
