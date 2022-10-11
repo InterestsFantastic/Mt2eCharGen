@@ -21,7 +21,7 @@ def get_key_from_aliases(search_term, main, aliases):
     main dict corresponding to the search term. Uses title case for the main
     dict and lower case for the alias search.'''
     if search_term.title() in main:
-        return key
+        return search_term.title()
     elif search_term.lower() in aliases:
         return aliases[search_term]
     else:
