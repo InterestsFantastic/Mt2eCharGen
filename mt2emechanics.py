@@ -2,6 +2,7 @@
 from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts
 from education import create_educations
+from utils import make_aliases
 
 non_proficiency_penalty = -3
 
@@ -10,30 +11,13 @@ mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
 characteristic_modifiers = keyval_sheet_to_dict(mechanics, 'CharacteristicModifiers', int)
 noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
+
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
+skills_aliases = make_aliases(skills, 'short')
 
 educations_funcs = [str, str, str, int, int, int, str, int, int, int]
 educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
 educations = create_educations(educations)
-
-def make_aliases(dictin, key):
-    '''Given a dictin with long keys, "key" is the name of a short form field.
-    Using that key, it creates an alias dict for output.
-    Currently works with dicts of dicts and dicts of arbitarary objects.
-    The output is used to index the dictin later through other functions.
-    E.g. {'apple':{'fruit':True, 'short':'apl'}, ...} --> {'apl':'apple", ...}'''
-    out = {}
-    for e in dictin:
-        if type(dictin[e]) is dict:
-            if dictin[e][key]:
-                out[dictin[e][key]] = e
-        else:
-            # Assuming arbitrary object instead.
-            if getattr(dictin[e], key):
-                out[getattr(dictin[e], key)] = e
-    return out
-
-skills_aliases = make_aliases(skills, 'short')
 educations_aliases = make_aliases(educations, 'short')
 
 def characteristic_modifier(num):
@@ -54,14 +38,9 @@ def noble_title(num):
     else:
         return None
 
-def get_skill_name(skill):
-    '''Returns the full form of a skill name from its alias (or skill name).'''
-    if skill in skills:
-        return skill
-    elif skill in skills_aliases:
-        return skills_aliases[skill]
-    else:
-        assert False, f'Skill not found: {skill}.'
 
 print(skills['Science (Philosophy)'])
 print(educations['University'].events[2].desc)
+
+from utils import get_key_from_aliases
+print(get_key_from_aliases('uni', educations, educations_aliases))
