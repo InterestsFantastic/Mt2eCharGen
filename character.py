@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 from mt2erolls import pick_roll_method, rollparse
-from mt2emechanics import  characteristic_modifier, educations, characteristic_modifiers
-
-characteristics = 'str dex end int edu soc'.split()
+from mt2emechanics import  characteristic_modifier, educations, characteristics
 
 def parse_gain_skill(desc):
     assert False, 'ensure that skill is in skill list here.'
@@ -19,10 +17,10 @@ def parse_gain_skill(desc):
     return skill, mod, val
 
 class Character:
-    def __init__(self, gen_method='normal'):
-        '''gen_method can bet set to 'boon' or 'bane' if desired.'''
-        if gen_method is not None:
-            self.gen(gen_method)
+    def __init__(self, characteristic_method='normal'):
+        '''characteristic_method can bet set to 'boon' or 'bane' if desired.'''
+        if characteristic_method is not None:
+            self.gen(characteristic_method)
 
     def gain_skill(self, desc):
         '''Character gains a skill.
@@ -40,7 +38,7 @@ class Character:
         else:
             assert False, f'Unknown modifier for gaining a skill: {mod}'
 
-    def gen(self, gen_method='normal'):
+    def gen(self, characteristic_method='normal'):
         self.terms=1
         self.can_test_psi = False
         self.next_career = None
@@ -50,11 +48,11 @@ class Character:
         self.enemies = []
         self.log = []
 
-        gen_method = pick_roll_method(gen_method)
+        characteristic_method = pick_roll_method(characteristic_method)
 
         characteristic_rolls = []
         for x in range(6):
-            characteristic_rolls.append(gen_method())
+            characteristic_rolls.append(characteristic_method())
         self.str, self.dex, self.end, self.int, self.edu, self.soc = characteristic_rolls
 
 

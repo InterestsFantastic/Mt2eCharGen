@@ -4,6 +4,7 @@ from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts
 from education import create_educations
 from utils import make_aliases
 
+characteristics = 'str dex end int edu soc'.split()
 non_proficiency_penalty = -3
 
 mechanics_file = 'mt2emechanics.ods'
