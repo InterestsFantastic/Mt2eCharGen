@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from ODSReader.odsreader import ODSReader
-from ODSReader.utils import keyval_sheet_to_dict, rows_to_list_of_dicts, dict_of_dicts_from_list_of_dicts, dict_sheet_to_dict_of_dicts
+from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts
 from education import create_educations
 
 non_proficiency_penalty = -3
@@ -48,5 +48,5 @@ def get_skill_name(skill):
     else:
         assert False, f'Skill not found: {skill}.'
 
-print(educations['University'])
+print(educations)
 print(skills['Science (Philosophy)'])
