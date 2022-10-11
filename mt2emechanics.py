@@ -33,6 +33,7 @@ educations_funcs = [str, str, str, int, int, int, str, int, int, int]
 educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
 print(educations)
 educations = create_educations(educations)
+print(educations)
 ##educations = rows_to_list_of_dicts(education_sheet, *educations_funcs)
 ##educations = create_educations(educations)
 
@@ -51,6 +52,5 @@ def get_skill_name(skill):
     else:
         assert False, f'Skill not found: {skill}.'
 
-print(educations[0])
 print(educations['University'])
 print(skills['Science (Philosophy)'])

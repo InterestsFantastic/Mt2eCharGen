@@ -8,12 +8,12 @@ events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9
 events_labels = events_labels.split()
 
 def create_educations(educations):
-    '''Input: spreadsheet, output: list of Education objects.'''
-    out = []
-    for e in educations:
+    '''Input: dict of education dicts. Output: dict of Education objects.'''
+    out = {}
+    for (e, d) in educations.items():
         education = Education()
         events = {}
-        for (k,v) in e.items():
+        for (k,v) in d.items():
             if k in events_labels:
                 # Creating events dict with int labels for rolling on.
                 event, num  = k.split('_')
@@ -24,7 +24,7 @@ def create_educations(educations):
             else:
                 setattr(education, k, v)
         setattr(education, 'events', events)
-        out.append(education)
+        out[e] = education
     return out
 
 class Education:
