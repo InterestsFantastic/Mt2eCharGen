@@ -16,10 +16,20 @@ educations_funcs = [str, str, str, int, int, int, str, int, int, int]
 educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
 educations = create_educations(educations)
 
-skills_aliases = {}
-for skill in skills:
-    if skills[skill]['short'] is not None:
-        skills_aliases[skills[skill]['short']] = skill
+def make_aliases(dictin, key):
+    '''If you have a dict with long keys, this makes a dict of
+    references to those keys using shorter keys, this will provide the
+    second dict.'''
+    out = {}
+    print(key)
+    for e in dictin:
+##        print(dictin[e])
+        if dictin[e][key]:
+            out[key] = e
+            print(out) # This is unexpected behavior!
+    return out
+
+skills_aliases = make_aliases(skills, 'short')
 
 def characteristic_modifier(num):
     '''Returns the diceroll modifier for having a particular value
@@ -50,3 +60,4 @@ def get_skill_name(skill):
 
 print(educations)
 print(skills['Science (Philosophy)'])
+print(skills_aliases)
