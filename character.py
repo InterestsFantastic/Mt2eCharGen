@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from mt2erolls import pick_roll_method, rollparse
+from mt2erolls import pick_roll_method
 from mt2emechanics import  characteristic_modifier, educations, characteristics
 
 def parse_gain_skill(desc):
@@ -70,7 +70,7 @@ class Character:
         
     def check_characteristic(self, target):
         '''Checks to see if character has e.g. 'int 8+'.'''
-        characteristic, target = rollparse(target)
+        characteristic, target = roll_parse(target)
         if characteristic in characteristics:
             return getattr(self, characteristic) >= target
         else:
@@ -86,7 +86,7 @@ class Character:
         'unmodified' will return the base roll.'''
 
         # Splits characteristic and target number and removes the + at the end.
-        characteristic, target = rollparse(target)
+        characteristic, target = roll_parse(target)
         if characteristic in characteristics:
             dm += self.characteristic_modifier(characteristic)
         else:
