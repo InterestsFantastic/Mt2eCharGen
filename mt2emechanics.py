@@ -63,7 +63,5 @@ def get_skill_name(skill):
     else:
         assert False, f'Skill not found: {skill}.'
 
-print(educations)
 print(skills['Science (Philosophy)'])
-print(skills_aliases)
-print(educations_aliases)
+print(educations['University'].events[2].desc)
