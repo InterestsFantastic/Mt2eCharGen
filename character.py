@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from mt2erolls import roll_normal, roll_boon, roll_bane, pick_roll_method, rollparse
+from mt2erolls import pick_roll_method, rollparse
 from mt2emechanics import  characteristic_modifier, educations, characteristic_modifiers
 
 characteristics = 'str dex end int edu soc'.split()
