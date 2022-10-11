@@ -9,6 +9,18 @@ mechanics_file = 'mt2emechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
 characteristic_modifiers = keyval_sheet_to_dict(mechanics, 'CharacteristicModifiers', int)
+noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
+skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
+
+educations_funcs = [str, str, str, int, int, int, str, int, int, int]
+educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
+educations = create_educations(educations)
+
+skills_aliases = {}
+for skill in skills:
+    if skills[skill]['short'] is not None:
+        skills_aliases[skills[skill]['short']] = skill
+
 def characteristic_modifier(num):
     '''Returns the diceroll modifier for having a particular value
     in a characteristic'''
@@ -20,28 +32,12 @@ def characteristic_modifier(num):
         # negative numbers.
         assert False, f'Improper characteristic modifier requested: {num}'
 
-noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
 def noble_title(num):
     '''Returns the noble title of a social status.'''
     if num in noble_titles:
         return noble_titles[num]
     else:
         return None
-
-##education_sheet = mechanics.getSheet('PrecareerEducation')
-educations_funcs = [str, str, str, int, int, int, str, int, int, int]
-educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
-print(educations)
-educations = create_educations(educations)
-print(educations)
-##educations = rows_to_list_of_dicts(education_sheet, *educations_funcs)
-##educations = create_educations(educations)
-
-skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
-skills_aliases = {}
-for skill in skills:
-    if skills[skill]['short'] is not None:
-        skills_aliases[skills[skill]['short']] = skill
 
 def get_skill_name(skill):
     '''Returns the full form of a skill name from its alias (or skill name).'''
