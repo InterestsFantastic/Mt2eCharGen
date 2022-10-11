@@ -21,12 +21,9 @@ def make_aliases(dictin, key):
     references to those keys using shorter keys, this will provide the
     second dict.'''
     out = {}
-    print(key)
     for e in dictin:
-##        print(dictin[e])
         if dictin[e][key]:
-            out[key] = e
-            print(out) # This is unexpected behavior!
+            out[dictin[e][key]] = e
     return out
 
 skills_aliases = make_aliases(skills, 'short')
