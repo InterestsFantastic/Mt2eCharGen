@@ -132,6 +132,13 @@ def edu7(char):
     # 7: Life Event. Roll on the Life Events table (see page 44).
     assert False, 'incomplete'
 
+def edu8(char):
+    event_result = char.characteristic_roll('soc 8+')
+    if event_result:
+        char.gain_ally()
+        char.gain_enemy()
+        return 'Gained ally and enemy.'
+
 def edu9(char):
     assert False, 'incomplete.'
     chosen_skill = 'bribery'
@@ -147,13 +154,6 @@ def edu10(char):
         char.gain_skill(f'chosen_skill +1')
         char.gain_rival()
         return 'Gained a level in {chosen_skill}.'
-
-def edu8(char):
-    event_result = char.characteristic_roll('soc 8+')
-    if event_result:
-        char.gain_ally()
-        char.gain_enemy()
-        return 'Gained ally and enemy.'
 
 def edu11(char):
     assert False, 'incomplete'
