@@ -139,10 +139,14 @@ def edu8(char):
         char.gain_enemy()
         return 'Gained ally and enemy.'
 
+##You develop a healthy interest in a hobby or other area of study.
+##Gain any skill of your choice, with the exception of Jack-of-all-Trades,
+##at level 0.
 def edu9(char):
-    assert False, 'incomplete.'
-    chosen_skill = 'bribery'
-    assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
+##    assert False, 'incomplete.'
+##    chosen_skill = 'bribery'
+##    assert chosen_skill != 'jot', 'Not allowed to choose JoT.'
+    chosen_skill = char.agent.choose_skill('s')
     char.gain_skill(f'chosen_skill +1')
     return f'Chose {chosen_skill}.'
 
