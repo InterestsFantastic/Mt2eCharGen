@@ -16,7 +16,11 @@ noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
 skills_aliases = make_aliases(skills, 'short')
 
-careers_funcs = [str, str, str, int, int, int, str, int, int, int]
+assert False, 'events will fail hard: '
+events_funcs = [str int]
+events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', 'name', *events_funcs)
+
+careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
 careers = dict_sheet_to_dict_of_dicts(mechanics, 'Careers', 'name', *careers_funcs)
 careers = create_careers(careers)
 careers_aliases = make_aliases(careers, 'short')
