@@ -1,5 +1,6 @@
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
+from mt2emechanics import events
 import inflect
 
 inflection = inflect.engine()
@@ -11,7 +12,7 @@ def create_careers(careers):
     '''Input: dict of career dicts. Output: dict of career objects.'''
     out = {}
     for (e, d) in careers.items():
-        career = career()
+        career = Career()
         events = {}
         for (k,v) in d.items():
             if k in events_labels:
