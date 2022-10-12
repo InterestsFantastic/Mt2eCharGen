@@ -20,6 +20,9 @@ def get_key_from_aliases(search_term, main, aliases):
     '''Searches a main dict, then an aliases dict, to return the key in the
     main dict corresponding to the search term. Uses title case for the main
     dict and lower case for the alias search.'''
+    # This should be a heavily restricted method, i.e. it should be used as
+    # an interpreter for finding valid responses, etc., likely within a class 
+    # method that is accessed from the outside with less arguments.
     if search_term.title() in main:
         return search_term.title()
     elif search_term.lower() in aliases:
