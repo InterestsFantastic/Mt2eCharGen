@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts
-from education import create_educations
+from careers import create_careers
 from utils import make_aliases
 
 characteristics = 'str dex end int edu soc'.split()
@@ -16,10 +16,10 @@ noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
 skills_aliases = make_aliases(skills, 'short')
 
-educations_funcs = [str, str, str, int, int, int, str, int, int, int]
-educations = dict_sheet_to_dict_of_dicts(mechanics, 'Educations', 'name', *educations_funcs)
-educations = create_educations(educations)
-educations_aliases = make_aliases(educations, 'short')
+careers_funcs = [str, str, str, int, int, int, str, int, int, int]
+careers = dict_sheet_to_dict_of_dicts(mechanics, 'Careers', 'name', *careers_funcs)
+careers = create_careers(careers)
+careers_aliases = make_aliases(careers, 'short')
 
 def characteristic_modifier(num):
     '''Returns the diceroll modifier for having a particular value
@@ -41,7 +41,7 @@ def noble_title(num):
 
 
 print(skills['Science (Philosophy)'])
-print(educations['University'].events[2].desc)
+print(careers['University'].events[2].desc)
 
 from utils import get_key_from_aliases
-print(get_key_from_aliases('uni', educations, educations_aliases))
+print(get_key_from_aliases('uni', careers, careers_aliases))

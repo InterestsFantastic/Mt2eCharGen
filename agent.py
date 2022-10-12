@@ -9,7 +9,7 @@ class Console:
         return get_key_from_aliases(out, skills, skills_aliases)
 
 from character import Character
-from mt2emechanics import educations
+from mt2emechanics import careers
 c = Character()
 c.agent = Console()
-print(educations['University'].events[9].run(c))
+print(careers['University'].events[9].run(c))

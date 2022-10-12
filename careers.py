@@ -7,11 +7,11 @@ inflection = inflect.engine()
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
 events_labels = events_labels.split()
 
-def create_educations(educations):
-    '''Input: dict of education dicts. Output: dict of Education objects.'''
+def create_careers(careers):
+    '''Input: dict of career dicts. Output: dict of career objects.'''
     out = {}
-    for (e, d) in educations.items():
-        education = Education()
+    for (e, d) in careers.items():
+        career = career()
         events = {}
         for (k,v) in d.items():
             if k in events_labels:
@@ -22,12 +22,12 @@ def create_educations(educations):
                 event.happen = globals()[event.career_event_short + str(event.num)]
                 events[num] = event
             else:
-                setattr(education, k, v)
-        setattr(education, 'events', events)
-        out[e] = education
+                setattr(career, k, v)
+        setattr(career, 'events', events)
+        out[e] = career
     return out
 
-class Education:
+class Career:
     def attempt_entry(self, char):
         '''Sets character.entered and appends to character.log.'''
         # generate DMs
