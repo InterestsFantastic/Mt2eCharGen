@@ -1,6 +1,5 @@
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
-from mt2emechanics import events
 import inflect
 
 inflection = inflect.engine()
