@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts
-from careers import create_careers
+from careers import create_careers, create_events
 from utils import make_aliases
 
 characteristics = 'str dex end int edu soc'.split()
@@ -16,9 +16,10 @@ noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
 skills_aliases = make_aliases(skills, 'short')
 
-assert False, 'events will fail hard: '
+assert False, 'How should I ignore key in creating events?'
 events_funcs = [str int]
 events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', 'name', *events_funcs)
+events = create_events(events)
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
 careers = dict_sheet_to_dict_of_dicts(mechanics, 'Careers', 'name', *careers_funcs)
