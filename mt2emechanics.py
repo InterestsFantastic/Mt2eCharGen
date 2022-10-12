@@ -22,7 +22,7 @@ events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', 'name', *events_funcs)
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
 careers = dict_sheet_to_dict_of_dicts(mechanics, 'Careers', 'name', *careers_funcs)
-careers = create_careers(careers)
+careers = create_careers(careers, events)
 careers_aliases = make_aliases(careers, 'short')
 
 def characteristic_modifier(num):
