@@ -30,3 +30,7 @@ def get_key_from_aliases(search_term, main, aliases):
     else:
         assert False, f'Search term not found: {search_term}.'
 
+def setattrs(self, dictin):
+    '''Gives an object attributes using keys and values of a dict.'''
+    for k,v in dictin.items():
+        setattr(self, k, v)
