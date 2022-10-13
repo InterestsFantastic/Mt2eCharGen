@@ -28,6 +28,10 @@ def create_careers(careers):
     return out
 
 class Career:
+    def __init__(self, **kwargs):
+        for k,v in kwargs.items():
+            setattr(self, k, v)
+            
     def attempt_entry(self, char):
         '''Sets character.entered and appends to character.log.'''
         # generate DMs
