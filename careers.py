@@ -1,3 +1,4 @@
+from utils import setattrs
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
 import inflect
@@ -29,8 +30,7 @@ def create_careers(careers):
 
 class Career:
     def __init__(self, **kwargs):
-        for k,v in kwargs.items():
-            setattr(self, k, v)
+        setattrs(self, kwargs)
             
     def attempt_entry(self, char):
         '''Sets character.entered and appends to character.log.'''
