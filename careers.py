@@ -23,12 +23,13 @@ def create_events(events):
     return out
 
 def create_careers(careers, events):
-##    assert False, 'destined to fail here. get events ironed out first'
     '''Input: dict of careers without events, events. Output: dict of career objects with events.'''
     for career in careers.values():
         career.events = {}
         for num, event in events[career.event_short].items():
             career.events[num] = event
+
+    assert False, 'incomplete'    
     return careers
 
         
