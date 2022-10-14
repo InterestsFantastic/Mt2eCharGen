@@ -12,23 +12,23 @@ def create_events(events):
     '''Input: list of dicts of events. Output: dict (career shortform) of dict (roll result) of events objects.'''
     out = {}
     for event in events:
+        # I want to include the keys in the object as well.
+        e = Event(event)
         # If career short dict has not been started yet, make it an empty dict.
         if event['career_short'] not in out:
             out[event['career_short']] = {}
         short = event.pop('career_short')
         num = event.pop('num')
-        out[short][num] = event
+        out[short][num] = e
     return out
 
-
 def create_careers(careers, events):
-    assert False, 'destined to fail here. get events ironed out first'
+##    assert False, 'destined to fail here. get events ironed out first'
     '''Input: dict of careers without events, events. Output: dict of career objects with events.'''
-    for ckey, career in careers.items():
+    for career in careers.values():
         career.events = {}
-        for e,event in events.items():
-            career.events[e] = event
-    # This should be altered.
+        for num, event in events[career.event_short].items():
+            career.events[num] = event
     return careers
 
         
@@ -50,8 +50,8 @@ def create_careers(careers, events):
     return out
 
 class Career:
-    def __init__(self, **kwargs):
-        setattrs(self, kwargs)
+    def __init__(self, attribs):
+        setattrs(self, attribs)
             
     def attempt_entry(self, char):
         '''Sets character.entered and appends to character.log.'''
@@ -110,11 +110,9 @@ class Career:
         
         return char.graduated
 
-class CareerEvent:
-    def __init__(self, desc, num, career_event_short='edu'):
-        self.num = num
-        self.desc = desc
-        self.career_event_short = career_event_short
+class Event:
+    def __init__(self, attribs):
+        setattrs(self, attribs)
         
     def run(self, char):
         '''Run and log life event.'''
