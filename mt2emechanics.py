@@ -19,7 +19,6 @@ skills_aliases = make_aliases(skills, 'short')
 events_funcs = [str, int]
 events = dict_sheet_to_list_of_dicts(mechanics, 'Events', *events_funcs)
 events = create_events(events)
-input(events)
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
 careers = dict_sheet_to_dict_of_objs(mechanics, 'Careers', 'name', Career, *careers_funcs)
@@ -42,7 +41,6 @@ def noble_title(num):
         return noble_titles[num]
     else:
         return None
-
 
 print(skills['Science (Philosophy)'])
 print(careers['University'].events[2].desc)
