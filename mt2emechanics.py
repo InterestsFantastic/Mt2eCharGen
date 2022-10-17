@@ -13,16 +13,16 @@ mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 characteristic_modifiers = keyval_sheet_to_dict(mechanics, 'CharacteristicModifiers', int)
 noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
 
-skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
-skills_aliases = make_aliases(skills, 'short')
+##skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
+##skills_aliases = make_aliases(skills, 'short')
 
-events_funcs = [str, int]
-events = dict_sheet_to_list_of_dicts(mechanics, 'Events', *events_funcs)
-events = create_events(events)
+##events_funcs = [str, int]
+##events = dict_sheet_to_list_of_dicts(mechanics, 'Events', events_funcs)
+##events = create_events(events)
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
-careers = dict_sheet_to_dict_of_objs(mechanics, 'Careers', 'name', Career, *careers_funcs)
-careers = create_careers(careers, events)
+careers = dict_sheet_to_dict_of_objs(mechanics, 'Careers', Career, ['name'], careers_funcs)
+##careers = create_careers(careers, events)
 
 def characteristic_modifier(num):
     '''Returns the diceroll modifier for having a particular value
