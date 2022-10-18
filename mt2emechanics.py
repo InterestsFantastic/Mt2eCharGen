@@ -10,11 +10,17 @@ non_proficiency_penalty = -3
 mechanics_file = 'mt2emechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
-characteristic_modifiers = keyval_sheet_to_dict(mechanics, 'CharacteristicModifiers', int)
-noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', int, str)
+characteristic_modifiers = keyval_sheet_to_dict(mechanics, 'CharacteristicModifiers', [int])
+noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', [int, str])
+##print(noble_titles)
+##input()
 
-##skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
+skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', 'skill')
 ##skills_aliases = make_aliases(skills, 'short')
+print(skills)
+##print(skills_aliases)
+input()
+
 
 ##events_funcs = [str, int]
 ##events = dict_sheet_to_list_of_dicts(mechanics, 'Events', events_funcs)
