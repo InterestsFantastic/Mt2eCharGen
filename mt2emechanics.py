@@ -4,6 +4,9 @@ from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts, d
 from careers import Career, create_careers, create_events
 from utils import make_aliases
 
+##import pprint
+##pp = pprint.PrettyPrinter(indent=4)
+
 characteristics = 'str dex end int edu soc'.split()
 non_proficiency_penalty = -3
 
@@ -16,13 +19,12 @@ noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', [int, str])
 ##input()
 
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', ['skill'])
-##skills_aliases = make_aliases(skills, 'short')
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-pp.pprint(skills)
+skills_aliases = make_aliases(skills, 'short')
 ##print(skills)
+##pp.pprint(skills)
 ##print(skills_aliases)
-input()
+##pp.pprint(skills_aliases)
+
 
 
 ##events_funcs = [str, int]
