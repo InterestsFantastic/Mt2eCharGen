@@ -26,8 +26,9 @@ skills_aliases = make_aliases(skills, 'short')
 ##pp.pprint(skills_aliases)
 
 events_funcs = [str, int]
-events = dict_sheet_to_list_of_dicts(mechanics, 'Events', events_funcs)
-pp.pprint(events[0:15])
+events_keys = ['career_short', 'num']
+events = dict_sheet_to_list_of_dicts(mechanics, 'Events', events_keys, events_funcs)
+pp.pprint(events[0:5])
 input()
 ##events = create_events(events)
 
