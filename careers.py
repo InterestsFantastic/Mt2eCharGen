@@ -7,20 +7,6 @@ inflection = inflect.engine()
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
 events_labels = events_labels.split()
 
-def create_events(events):
-    '''Input: list of dicts of events. Output: dict (career shortform) of dict (roll result) of events objects.'''
-    out = {}
-    for event in events:
-        # I want to include the keys in the object as well.
-        e = Event(event)
-        # If career short dict has not been started yet, make it an empty dict.
-        if event['career_short'] not in out:
-            out[event['career_short']] = {}
-        short = event.pop('career_short')
-        num = event.pop('num')
-        out[short][num] = e
-    return out
-
 def create_careers(careers, events):
     '''Input: dict of careers without events, events. Output: dict of career objects with events.'''
     for career in careers.values():
@@ -109,6 +95,20 @@ class Career:
         char.log.append(logstr)
         
         return char.graduated
+
+def create_events(events):
+    '''Input: list of dicts of events. Output: dict (career shortform) of dict (roll result) of events objects.'''
+    out = {}
+    for event in events:
+        # I want to include the keys in the object as well.
+        e = Event(event)
+        # If career short dict has not been started yet, make it an empty dict.
+        if event['career_short'] not in out:
+            out[event['career_short']] ={}
+        short = event.pop('career_short')
+        num = event.pop('num')
+        out[short][num] = e
+    return out
 
 class Event:
     def __init__(self, attribs):
