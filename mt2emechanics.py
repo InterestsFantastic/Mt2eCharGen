@@ -22,14 +22,17 @@ skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', ['skill'])
 skills_aliases = make_aliases(skills, 'short')
 ##print(skills)
 ##pp.pprint(skills)
+##input()
 ##print(skills_aliases)
 ##pp.pprint(skills_aliases)
+##input()
 
 events_funcs = [str, int]
 events_keys = ['career_short', 'num']
-events = dict_sheet_to_list_of_dicts(mechanics, 'Events', events_keys, events_funcs)
-pp.pprint(events[0:5])
-input()
+events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', events_keys, events_funcs)
+pp.pprint(events)
+##pp.pprint(events['life'])
+##input()
 ##events = create_events(events)
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
