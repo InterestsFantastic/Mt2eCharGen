@@ -2,7 +2,6 @@ from utils import setattrs
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
 import inflect
-
 inflection = inflect.engine()
 
 events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
