@@ -4,9 +4,6 @@ from rpgroller.roller import roll
 import inflect
 inflection = inflect.engine()
 
-events_labels = 'event_2 event_3 event_4 event_5 event_6 event_7 event_8 event_9 event_10 event_11 event_12'
-events_labels = events_labels.split()
-
 def create_careers(careers, events):
     '''Input: dict of careers without events, events. Output: dict of career objects with events.'''
     for career in careers.values():
