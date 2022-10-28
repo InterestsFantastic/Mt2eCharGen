@@ -95,6 +95,11 @@ class Career:
 class Event:
     def __init__(self, attribs):
         setattrs(self, attribs)
+        self.make_happen()
+        
+    def make_happen(self):
+        '''Assigns functions to self.happen (like `edu2()`).'''
+        self.happen = globals()[self.career_short + str(self.num)]
         
     def run(self, char):
         '''Run and log life event.'''
