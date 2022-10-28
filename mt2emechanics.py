@@ -33,6 +33,7 @@ events_keys = ['career_short', 'num']
 events = dict_sheet_to_dict_of_objs(mechanics, 'Events', Event, events_keys, events_funcs)
 ##pp.pprint(events)
 pp.pprint(events['life'][3].desc)
+pp.pprint(events['life'][3].happen)
 input('End of test.')
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
