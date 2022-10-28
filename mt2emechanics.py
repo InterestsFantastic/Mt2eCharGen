@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts, dict_sheet_to_dict_of_objs, dict_sheet_to_list_of_dicts
-from careers import Career, Event, create_careers, create_events
+from careers import Career, Event, create_careers
 from utils import make_aliases
 
 import pprint
@@ -31,10 +31,9 @@ events_funcs = [str, int]
 events_keys = ['career_short', 'num']
 ##events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', events_keys, events_funcs)
 events = dict_sheet_to_dict_of_objs(mechanics, 'Events', Event, events_keys, events_funcs)
-pp.pprint(events)
-##pp.pprint(events['life'])
-##input()
-##events = create_events(events)
+##pp.pprint(events)
+pp.pprint(events['life'][3].desc)
+input('End of test.')
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
 careers = dict_sheet_to_dict_of_objs(mechanics, 'Careers', Career, ['name'], careers_funcs)
