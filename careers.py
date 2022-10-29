@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+'''Careers and career events/mishaps.'''
 from utils import setattrs
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
@@ -95,7 +97,7 @@ class Career:
 class Event:
     def __init__(self, attribs):
         setattrs(self, attribs)
-        self.make_happen()
+##        self.make_happen()
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
