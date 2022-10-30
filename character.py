@@ -103,14 +103,16 @@ class Character:
         else:
             assert False, f'unknown extras specification {extras}'
                 
-    def print_characteristics(self):
-        print(self.str, self.dex, self.end, self.int, self.edu, self.soc)
+    @property
+    def characteristics_string(self):
+        '''Returns string of tuple of characteristics.'''
+        return str((self.str, self.dex, self.end, self.int, self.edu, self.soc))
 
 if __name__ == '__main__':
     c = Character()
-    c.print_characteristics()
-    print('str mod: ', c.characteristic_modifier('str'))
-    educations[0].attempt_entry(c)
-    print(c.log)
+    print(f'Character created with characteristics: {c.characteristics_string}')
+##    print('str mod: ', c.characteristic_modifier('str'))
+##    educations[0].attempt_entry(c)
+##    print(c.log)
     
 

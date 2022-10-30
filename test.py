@@ -3,5 +3,7 @@ from mt2emechanics import events, skills, skills_aliases
 from character import Character
 
 c = Character()
-print('Characteristics: ', end='')
-c.print_characteristics()
+print(f'Character created with characteristics: {c.characteristics_string}')
+
+
+
