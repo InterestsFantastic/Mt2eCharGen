@@ -95,7 +95,9 @@ class Career:
         return char.graduated
 
 
-def none_event(event):
+def none_event(event, agent=None):
+    '''Nothing happens as a result of this event being run.'''
+    # agent included for conformity.
     return 'No effect.'
 
 
@@ -113,6 +115,19 @@ class Event:
             return
         if self.num not in dothese[self.career_short]:
             return
+
+        event = self.script
+        if event[-1] == '.':
+            done = True
+            event = event[:-1]
+        else:
+            done = False
+        
+        if event == 'none':
+            self.happen = none_event
+        if not done:
+            assert False, 'Incomplete.'
+##            print(self.happen())
         
         # Look at script
         # 
