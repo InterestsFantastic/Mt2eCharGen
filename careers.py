@@ -95,6 +95,8 @@ class Career:
         return char.graduated
 
 
+def none_event(event):
+    return 'No effect.'
 
 
 
@@ -106,6 +108,12 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
+        dothese = {'life':[3]}
+        if self.career_short not in dothese:
+            return
+        if self.num not in dothese[self.career_short]:
+            return
+        
         # Look at script
         # 
 ##        self.happen = globals()[self.career_short + str(self.num)]
@@ -113,7 +121,7 @@ class Event:
     def run(self, char, agent):
         '''Run and log life event.'''
         logstr = f'Life Event: {self.desc}'
-        result = self.happen(char, agent)
+        result = self.happen(char, agent) if hasattr(self, 'happen') else None
         if result is not None:
             logstr += f' {result}'
         char.log.append(logstr)

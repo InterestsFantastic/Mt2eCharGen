@@ -12,4 +12,4 @@ from character import Character
 from mt2emechanics import careers
 c = Character()
 c.agent = Console()
-print(careers['University'].events[9].run(c))
+##print(careers['University'].events[9].run(c))
