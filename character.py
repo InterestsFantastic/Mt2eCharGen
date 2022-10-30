@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
-from mt2emechanics import  characteristic_modifier, educations, characteristics
+from mt2emechanics import  characteristic_modifier, characteristics #educations
 
 def parse_gain_skill(desc):
     assert False, 'ensure that skill is in skill list here.'

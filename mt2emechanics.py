@@ -32,13 +32,13 @@ events_keys = ['career_short', 'num']
 ##events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', events_keys, events_funcs)
 events = dict_sheet_to_dict_of_objs(mechanics, 'Events', Event, events_keys, events_funcs)
 ##pp.pprint(events)
-pp.pprint(events['life'])
+##pp.pprint(events['life'])
 ##print(dir(events['life'][2]))
 ##pp.pprint(events['life'][2].career_short)
-print(events['life'][2].script)
+##print(events['life'][2].script)
 ##pp.pprint(events['life'][3].desc)
 ##pp.pprint(events['life'][3].happen)
-input('End of test.')
+##input('End of test.')
 
 careers_funcs = [str, str, str, str, int, int, int, str, int, int, int]
 careers = dict_sheet_to_dict_of_objs(mechanics, 'Careers', Career, ['name'], careers_funcs)
@@ -62,8 +62,8 @@ def noble_title(num):
     else:
         return None
 
-print(skills['Science (Philosophy)'])
-print(careers['University'].events[2].desc)
-
-from utils import get_key_from_aliases
-print(get_key_from_aliases('uni', careers, careers_aliases))
+##print(skills['Science (Philosophy)'])
+##print(careers['University'].events[2].desc)
+##
+##from utils import get_key_from_aliases
+##print(get_key_from_aliases('uni', careers, careers_aliases))

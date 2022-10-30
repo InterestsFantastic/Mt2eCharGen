@@ -94,19 +94,26 @@ class Career:
         
         return char.graduated
 
+
+
+
+
+
 class Event:
     def __init__(self, attribs):
         setattrs(self, attribs)
-##        self.make_happen()
+        self.make_happen()
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        self.happen = globals()[self.career_short + str(self.num)]
+        # Look at script
+        # 
+##        self.happen = globals()[self.career_short + str(self.num)]
         
-    def run(self, char):
+    def run(self, char, agent):
         '''Run and log life event.'''
         logstr = f'Life Event: {self.desc}'
-        result = self.happen(char)
+        result = self.happen(char, agent)
         if result is not None:
             logstr += f' {result}'
         char.log.append(logstr)
