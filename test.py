@@ -1,5 +1,5 @@
 from mt2emechanics import events#, skills, skills_aliases
-##from agent import Console
+from agent import Console
 from character import Character
 
 import pprint
