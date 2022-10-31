@@ -34,3 +34,8 @@ def setattrs(self, dictin):
     '''Gives an object attributes using keys and values of a dict.'''
     for k,v in dictin.items():
         setattr(self, k, v)
+
+def set_zeros(self, keys):
+    '''Gives an object attributes with value 0.'''
+    for k in keys:
+        setattr(self, k, 0)
