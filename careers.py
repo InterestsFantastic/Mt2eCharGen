@@ -36,7 +36,7 @@ def create_careers(careers, events):
 class Career:
     def __init__(self, attribs):
         setattrs(self, attribs)
-            
+        
     def attempt_entry(self, char):
         '''Sets character.entered and appends to character.log.'''
         # generate DMs
@@ -95,12 +95,12 @@ class Career:
         return char.graduated
 
 
-def none_event(char, agent=None):
+def none_event(char):
     '''Nothing happens as a result of this event being run.'''
     # agent included for conformity.
     return 'No effect.'
 
-def injury(char, agent=None):
+def injury(char):
     '''Character is injured.'''
     return char.injure()
 
@@ -112,7 +112,7 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        dothese = {'life':[2,3]}
+        dothese = {'life':[2,3,5]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -129,6 +129,10 @@ class Event:
             self.happen = none_event
         elif event == 'injury':
             self.happen = injury
+        elif event[:5] == 'gain ':
+            def func(char):
+                return char.gain(event[5:])
+            self.happen = func
         if not done:
             assert False, 'Incomplete.'
 ##            print(self.happen())
@@ -140,7 +144,7 @@ class Event:
     def run(self, char, agent):
         '''Run and log life event.'''
         logstr = f'Event: {self.desc}'
-        result = self.happen(char, agent) if hasattr(self, 'happen') else None
+        result = self.happen(char) if hasattr(self, 'happen') else None
         if result is not None:
             logstr += f' {result}'
         char.log.append(logstr)
