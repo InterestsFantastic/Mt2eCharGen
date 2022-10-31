@@ -5,6 +5,9 @@ from mt2emechanics import  characteristic_modifier, characteristics, randphys, p
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
+from utils import set_zeros
+
+people = 'ally enemy patron rival contact'.split()
 
 def parse_gain_skill(desc):
     assert False, 'ensure that skill is in skill list here.'
@@ -26,6 +29,7 @@ class Character:
         if characteristic_method is not None:
             self.gen(characteristic_method)
         self.agent = 'agent'
+        set_zeros(self, people)
 
     def gain_skill(self, desc):
         '''Character gains a skill.
