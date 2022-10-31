@@ -7,7 +7,7 @@ pp = pprint.PrettyPrinter(indent=4)
 
 console = Console()
 c = Character()
-print(f'Character created with characteristics: {c.characteristics_string}\n\n')
+print(f'Character created with characteristics: {c.upp}\n\n')
 
 ##print(events['life'][2].script)
 events['life'][3].run(c, console)
