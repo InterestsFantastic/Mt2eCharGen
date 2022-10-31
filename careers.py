@@ -139,7 +139,7 @@ class Event:
         
     def run(self, char, agent):
         '''Run and log life event.'''
-        logstr = f'Life Event: {self.desc}'
+        logstr = f'Event: {self.desc}'
         result = self.happen(char, agent) if hasattr(self, 'happen') else None
         if result is not None:
             logstr += f' {result}'
