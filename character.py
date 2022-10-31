@@ -25,6 +25,7 @@ class Character:
         '''characteristic_method can bet set to 'boon' or 'bane' if desired.'''
         if characteristic_method is not None:
             self.gen(characteristic_method)
+        self.agent = 'agent'
 
     def gain_skill(self, desc):
         '''Character gains a skill.
