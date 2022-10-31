@@ -95,12 +95,14 @@ class Career:
         return char.graduated
 
 
-def none_event(event, agent=None):
+def none_event(char, agent=None):
     '''Nothing happens as a result of this event being run.'''
     # agent included for conformity.
     return 'No effect.'
 
-
+def injury(char, agent=None):
+    '''Character is injured.'''
+    return char.injure()
 
 
 class Event:
@@ -110,7 +112,7 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        dothese = {'life':[3]}
+        dothese = {'life':[2,3]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -125,6 +127,8 @@ class Event:
         
         if event == 'none':
             self.happen = none_event
+        elif event == 'injury':
+            self.happen = injury
         if not done:
             assert False, 'Incomplete.'
 ##            print(self.happen())

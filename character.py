@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
-from mt2emechanics import  characteristic_modifier, characteristics #educations
+from mt2emechanics import  characteristic_modifier, characteristics, randphys, phys_characteristics
+from rpgroller.roller import roll
+from random import choice
 
 def parse_gain_skill(desc):
     assert False, 'ensure that skill is in skill list here.'
@@ -56,6 +58,54 @@ class Character:
             characteristic_rolls.append(characteristic_method())
         self.str, self.dex, self.end, self.int, self.edu, self.soc = characteristic_rolls
 
+
+    def injure(self, num=0):
+        '''Character is injured. You can specify an injury (sometimes you
+        would roll twice and pick the lowest dice or something to that
+        effect.'''
+        assert 0 <= num <= 6, f'Invalid injury number {num}'
+
+        # By default, roll 1d6.
+        if num == 0:
+            num = roll('1d6')
+            print(num)
+
+        if num == 1:
+            out  = 'Nearly killed – reduce one physical characteristic by 1D, reduce two other physical characteristics by 2.'
+            phys = randphys()
+            reduction = roll('1d6')
+            setattr(self, phys, getattr(self, phys) - reduction)
+            for pc in phys_characteristics:
+                if pc != phys:
+                    setattr(self, pc, getattr(self, pc) - 2)
+            out += f' Result: {phys} reduced by {reduction} and the others by 2.'
+        elif num == 2:
+            out  = 'Severely injured – reduce one physical characteristic by 1D.'
+            phys = randphys()
+            reduction = roll('1d6')
+            setattr(self, phys, getattr(self, phys) - reduction)
+            out += f' Result: {phys} reduced by {reduction}.'
+        elif num == 3:
+            out  = 'Missing Eye or Limb – reduce STR or DEX by 2.'
+            phys = choice(['str', 'dex'])
+            reduction = 2
+            setattr(self, phys, getattr(self, phys) - reduction)
+            out += f' Result: {phys} reduced by {reduction}.'
+        elif num == 4:
+            out  = 'Scarred – you are scarred and injured. Reduce any physical characteristic by 2.'
+            phys = randphys()
+            reduction = 2
+            setattr(self, phys, getattr(self, phys) - reduction)
+            out += f' Result: {phys} reduced by {reduction}.'
+        elif num == 5:
+            out  = 'Injured. Reduce any physical characteristic by 1.'
+            phys = randphys()
+            reduction = 1
+            setattr(self, phys, getattr(self, phys) - reduction)
+            out += f' Result: {phys} reduced by {reduction}.'
+        else:
+            out = 'No effect.'
+        return out
 
     def gain_ally(self):
         self.allies.append('I')

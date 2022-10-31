@@ -3,12 +3,18 @@ from ODSReader.odsreader import ODSReader
 from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts, dict_sheet_to_dict_of_objs, dict_sheet_to_list_of_dicts
 from careers import Career, Event, create_careers
 from utils import make_aliases
+from random import choice
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
-characteristics = 'str dex end int edu soc'.split()
 non_proficiency_penalty = -3
+
+characteristics = 'str dex end int edu soc'.split()
+phys_characteristics = ['str', 'dex', 'end']
+def randphys():
+    '''Returns random physical characteristic.'''
+    return choice(phys_characteristics)
 
 mechanics_file = 'mt2emechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
