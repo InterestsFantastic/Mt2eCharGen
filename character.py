@@ -4,6 +4,7 @@ from mt2erolls import pick_roll_method
 from mt2emechanics import  characteristic_modifier, characteristics, randphys, phys_characteristics
 from rpgroller.roller import roll
 from random import choice
+from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
 
 def parse_gain_skill(desc):
     assert False, 'ensure that skill is in skill list here.'
@@ -153,6 +154,11 @@ class Character:
         else:
             assert False, f'unknown extras specification {extras}'
                 
+    @property
+    def upp(self):
+        '''Returns character's UPP.'''
+        return numbers_to_letters([self.str, self.dex, self.end, self.int, self.edu, self.soc])
+
     @property
     def characteristics_string(self):
         '''Returns string of tuple of characteristics.'''
