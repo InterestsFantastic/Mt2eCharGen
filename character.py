@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
-from mt2emechanics import  characteristic_modifier, characteristics, randphys, phys_characteristics
+from mt2emechanics import  characteristic_modifier, characteristics, randphys, phys_characteristics, skills
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
@@ -30,7 +30,19 @@ class Character:
             self.gen(characteristic_method)
         self.agent = 'agent'
         set_zeros(self, people)
+        print(self.contact)
 
+    def gain(self, gained):
+        '''Gain something, like a skill, ally, etc.'''
+        parts = gained.split(' ')
+        print(parts)
+        if parts[0] in people:
+            if len(parts) == 1:
+                setattr(self, parts[0], getattr(self, parts[0]) + 1)
+                return f'Gained {gained}.'
+            else:
+                assert False, 'Incomplete'
+    
     def gain_skill(self, desc):
         '''Character gains a skill.
         desc examples: carouse 0, carouse 1, carouse +1'''

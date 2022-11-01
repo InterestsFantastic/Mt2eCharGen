@@ -112,7 +112,7 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        dothese = {'life':[2,3,5]}
+        dothese = {'life':[2,3,5], 'edu':[5]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -141,7 +141,7 @@ class Event:
         # 
 ##        self.happen = globals()[self.career_short + str(self.num)]
         
-    def run(self, char, agent):
+    def run(self, char):
         '''Run and log life event.'''
         logstr = f'Event: {self.desc}'
         result = self.happen(char) if hasattr(self, 'happen') else None
