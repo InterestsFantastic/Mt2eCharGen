@@ -112,7 +112,7 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        dothese = {'life':[2,3,5], 'edu':[5]}
+        dothese = {'life':[2,3,5,6,7], 'edu':[5]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:

@@ -7,7 +7,6 @@ pp = pprint.PrettyPrinter(indent=4)
 c = Character()
 print(f'Character created with characteristics: {c.upp}\n\n')
 events['life'][3].run(c)
-input(c.log)
 
 ##for x in range(25):
 ##    events['life'][2].run(c)
@@ -17,7 +16,5 @@ input(c.log)
 ##input()
 
 events['life'][5].run(c)
-events['life'][6].run(c)
-events['life'][7].run(c)
 events['edu'][5].run(c)
 pp.pprint(c.log)

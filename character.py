@@ -30,10 +30,10 @@ class Character:
             self.gen(characteristic_method)
         self.agent = 'agent'
         set_zeros(self, people)
-        print(self.contact)
 
     def gain(self, gained):
         '''Gain something, like a skill, ally, etc.'''
+        print(gained)
         parts = gained.split(' ')
         print(parts)
         if parts[0] in people:
