@@ -189,6 +189,15 @@ class Character:
         '''Returns string of tuple of characteristics.'''
         return str((self.str, self.dex, self.end, self.int, self.edu, self.soc))
 
+    @property
+    def char_description(self):
+        characterline = f'Character: {self.upp}.'
+        peopleline = ''
+        for p in people:
+            peopleline += f'{p.title()}: {getattr(self, p)}\t'
+        desc = f'{characterline}\n{peopleline}'
+        return desc
+    
 if __name__ == '__main__':
     c = Character()
     print(f'Character created with characteristics: {c.characteristics_string}')
