@@ -13,7 +13,7 @@ def parse_gain_skill(desc):
     assert False, 'ensure that skill is in skill list here.'
     '''Helper for Character.gain_skill
     Splits 'carouse 1' into ('carouse', '=', 1).
-    Splits 'carouse +1' into ('carouse', '+'.'''
+    Splits 'carouse +1' into ('carouse', '+', 1).'''
     skill, rest = desc.split()
     if rest[0] == '+':
         mod = '+'
@@ -42,6 +42,14 @@ class Character:
                 return f'Gained {gained}.'
             else:
                 assert False, 'Incomplete'
+        elif parts[0] in characteristics:
+            # Default gain is 1.
+            if len(parts) == 1:
+                change = 1
+            else:
+                change = int(parts[1])
+            setattr(self, parts[0], getattr(self, parts[0]) + change)
+            return f'Gained {change} {parts[0]}.'
     
     def gain_skill(self, desc):
         '''Character gains a skill.

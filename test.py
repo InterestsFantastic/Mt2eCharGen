@@ -16,5 +16,6 @@ events['life'][3].run(c)
 ##input()
 
 events['life'][5].run(c)
-events['edu'][5].run(c)
+##events['edu'][5].run(c)
+events['edu'][12].run(c)
 pp.pprint(c.log)
