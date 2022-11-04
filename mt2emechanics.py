@@ -35,10 +35,21 @@ for s in skills:
         else:
             skills_cascades[cf] = [s]
 
+def findskill(skill):
+    '''Returns the skill key used in dicts, referred to by a string skill,
+    searching aliases as well as the base dict of skills. Accepts lower case
+    skills by searching via title case.'''
+    if skill.title() in skills:
+        return skill.title()
+    elif skill in skills_aliases:
+        return skills_aliases[skill]
+
 ##pp.pprint(noble_titles)
 ##pp.pprint(skills)
 ##pp.pprint(skills_aliases)
 ##pp.pprint(skills_cascades)
+##print(findskill('carouse'))
+##print(findskill('riding'))
 ##input()
 
 events_funcs = [str, int]
