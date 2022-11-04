@@ -9,6 +9,16 @@ from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
 from utils import set_zeros
 
 people = 'ally enemy patron rival contact'.split()
+zeros = 'next_qual_dm'.split()
+
+def extract_skill_from_gain(desc):
+    *skill, val = desc.split(' ')
+    if len(desc) == 1:
+        skill = skill[0]
+    else:
+        # eg "vacc suit"
+        skill = ' '.join(skill)
+    return findskill(skill)
 
 def parse_gain_skill(desc):
     '''Helper for Character.gain_skill
@@ -27,8 +37,6 @@ def parse_gain_skill(desc):
     assert val[0] != '-', 'Losing skills not supported.'
     mod = '+' if val[0] == '+' else '='
     val = int(val)
-
-    
     return skill, mod, val
 
 class Character:
@@ -37,8 +45,10 @@ class Character:
         if characteristic_method is not None:
             self.gen(characteristic_method)
         self.skills = {}
+        self.benefit_dms = []
         self.agent = 'agent'
         set_zeros(self, people)
+        set_zeros(self, zeros)
 
     def gain(self, gained):
         '''Gain something, like a skill, ally, etc.'''
