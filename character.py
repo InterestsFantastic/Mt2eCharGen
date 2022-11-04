@@ -11,19 +11,12 @@ from utils import set_zeros
 people = 'ally enemy patron rival contact'.split()
 zeros = 'next_qual_dm'.split()
 
-def extract_skill_from_gain(desc):
-    *skill, val = desc.split(' ')
-    if len(desc) == 1:
-        skill = skill[0]
-    else:
-        # eg "vacc suit"
-        skill = ' '.join(skill)
-    return findskill(skill)
-
 def parse_gain_skill(desc):
     '''Helper for Character.gain_skill
     Splits 'carouse 1' into ('Carouse', '=', 1).
-    Splits 'carouse +1' into ('Carouse', '+', 1).'''
+    Splits 'carouse +1' into ('Carouse', '+', 1).
+    If skill is not found it will return None and therefore you want to make
+    sure that you aren't expecting multiple args if it can fail.'''
 
     *skill, val = desc.split(' ')
     if len(desc) == 1:
@@ -31,8 +24,9 @@ def parse_gain_skill(desc):
     else:
         # eg "vacc suit"
         skill = ' '.join(skill)
-    skill = findskill(skill) 
-    assert skill, f'Skill in {desc} not found.'
+    skill = findskill(skill)
+    if not skill:
+        return None
 
     assert val[0] != '-', 'Losing skills not supported.'
     mod = '+' if val[0] == '+' else '='
@@ -52,10 +46,12 @@ class Character:
 
     def gain(self, gained):
         '''Gain something, like a skill, ally, etc.'''
-        print(gained)
+        # Supports things like 'ally 2'
         parts = gained.split(' ')
-        print(parts)
-        if parts[0] in people:
+
+        if parse_gain_skill(gained):
+            self.gain_skill(gained)
+        elif parts[0] in people:
             if len(parts) == 1:
                 setattr(self, parts[0], getattr(self, parts[0]) + 1)
                 return f'Gained {gained}.'
@@ -69,13 +65,13 @@ class Character:
                 change = int(parts[1])
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'
-        elif findskill(parts[0]):
-            self.gain_skill(gained)
     
     def gain_skill(self, desc):
         '''Character gains a skill.
         desc examples: carouse 0, carouse 1, carouse +1'''
         skill, mod, val = parse_gain_skill(desc)
+        assert skill, f'Skill not found in {desc}'
+        
         if mod == '=':
             if skill not in self.skills or self.skills[skill] < val:
                 # Will not reduce a skill.
