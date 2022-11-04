@@ -26,7 +26,7 @@ noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', [int, str])
 
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', ['skill'])
 skills_aliases = make_aliases(skills, 'short')
-# Sometimes there are dual+ aliases for a skill.
+# Sometimes there are 2+ aliases for a skill.
 skills_aliases.update(keyval_sheet_to_dict(mechanics, 'OtherSkillAliases'))
 
 ##print(skills)
