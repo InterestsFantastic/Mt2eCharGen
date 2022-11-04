@@ -11,7 +11,7 @@ pp = pprint.PrettyPrinter(indent=4)
 non_proficiency_penalty = -3
 
 characteristics = 'str dex end int edu soc'.split()
-phys_characteristics = ['str', 'dex', 'end']
+phys_characteristics = 'str dex end'.split()
 def randphys():
     '''Returns random physical characteristic.'''
     return choice(phys_characteristics)
@@ -26,6 +26,9 @@ noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', [int, str])
 
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', ['skill'])
 skills_aliases = make_aliases(skills, 'short')
+# Sometimes there are dual+ aliases for a skill.
+skills_aliases.update(keyval_sheet_to_dict(mechanics, 'OtherSkillAliases'))
+
 ##print(skills)
 ##pp.pprint(skills)
 ##input()
