@@ -37,11 +37,9 @@ for s in skills:
         else:
             skills_cascades[cf] = [s]
 
-##pp.pprint(skills_cascades)
-##print(skills)
 ##pp.pprint(skills)
-##print(skills_aliases)
 ##pp.pprint(skills_aliases)
+##pp.pprint(skills_cascades)
 ##input()
 
 events_funcs = [str, int]
