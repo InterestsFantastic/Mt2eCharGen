@@ -43,6 +43,8 @@ def findskill(skill):
         return skill.title()
     elif skill in skills_aliases:
         return skills_aliases[skill]
+    else:
+        return None
 
 ##pp.pprint(noble_titles)
 ##pp.pprint(skills)
