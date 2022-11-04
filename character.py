@@ -12,20 +12,23 @@ people = 'ally enemy patron rival contact'.split()
 
 def parse_gain_skill(desc):
     '''Helper for Character.gain_skill
-    Splits 'carouse 1' into ('carouse', '=', 1).
-    Splits 'carouse +1' into ('carouse', '+', 1).'''
-    if ') ' in desc:
-        skill, rest = desc.split(') ')
-        skill += ')'
+    Splits 'carouse 1' into ('Carouse', '=', 1).
+    Splits 'carouse +1' into ('Carouse', '+', 1).'''
+
+    *skill, val = desc.split(' ')
+    if len(desc) == 1:
+        skill = skill[0]
     else:
-        skill, rest = desc.split()
-
-    assert rest[0] != '-', 'Losing skills not supported.'
-
+        # eg "vacc suit"
+        skill = ' '.join(skill)
     skill = findskill(skill) 
     assert skill, f'Skill in {desc} not found.'
-    mod = '+' if rest[0] == '+' else '='
-    val = int(rest)
+
+    assert val[0] != '-', 'Losing skills not supported.'
+    mod = '+' if val[0] == '+' else '='
+    val = int(val)
+
+    
     return skill, mod, val
 
 class Character:
@@ -201,7 +204,8 @@ class Character:
         peopleline = ''
         for p in people:
             peopleline += f'{p.title()}: {getattr(self, p)}\t'
-        desc = f'{characterline}\n{peopleline}'
+        skillsline = f'Skills: {self.skills}'
+        desc = '\n'.join([characterline, peopleline, skillsline])
         return desc
     
 if __name__ == '__main__':
