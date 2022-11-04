@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
-from mt2emechanics import  characteristic_modifier, characteristics, randphys, phys_characteristics, skills
+from mt2emechanics import  characteristic_modifier, characteristics, randphys, \
+     phys_characteristics, skills, findskill
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
@@ -50,6 +51,8 @@ class Character:
                 change = int(parts[1])
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'
+        elif findskill(parts[0]):
+            self.gain_skill(gained)
     
     def gain_skill(self, desc):
         '''Character gains a skill.
