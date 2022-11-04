@@ -36,12 +36,10 @@ for s in skills:
             skills_cascades[cf].append(s)
         else:
             skills_cascades[cf] = [s]
-pp.pprint(skills_cascades)
-input()
 
+##pp.pprint(skills_cascades)
 ##print(skills)
 ##pp.pprint(skills)
-##input()
 ##print(skills_aliases)
 ##pp.pprint(skills_aliases)
 ##input()
