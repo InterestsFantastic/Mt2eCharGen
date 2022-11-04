@@ -8,6 +8,9 @@ from random import choice
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
+mechanics_file = 'mt2emechanics.ods'
+mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
+
 non_proficiency_penalty = -3
 
 characteristics = 'str dex end int edu soc'.split()
@@ -16,13 +19,8 @@ def randphys():
     '''Returns random physical characteristic.'''
     return choice(phys_characteristics)
 
-mechanics_file = 'mt2emechanics.ods'
-mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
-
 characteristic_modifiers = keyval_sheet_to_dict(mechanics, 'CharacteristicModifiers', [int])
 noble_titles = keyval_sheet_to_dict(mechanics, 'NobleTitles', [int, str])
-##print(noble_titles)
-##input()
 
 skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', ['skill'])
 skills_aliases = make_aliases(skills, 'short')
@@ -37,6 +35,7 @@ for s in skills:
         else:
             skills_cascades[cf] = [s]
 
+##pp.pprint(noble_titles)
 ##pp.pprint(skills)
 ##pp.pprint(skills_aliases)
 ##pp.pprint(skills_cascades)
