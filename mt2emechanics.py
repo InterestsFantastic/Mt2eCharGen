@@ -28,6 +28,16 @@ skills = dict_sheet_to_dict_of_dicts(mechanics, 'Skills', ['skill'])
 skills_aliases = make_aliases(skills, 'short')
 # Sometimes there are 2+ aliases for a skill.
 skills_aliases.update(keyval_sheet_to_dict(mechanics, 'OtherSkillAliases'))
+skills_cascades = {}
+for s in skills:
+    cf = skills[s]['cascade_from']
+    if cf:
+        if cf in skills_cascades:
+            skills_cascades[cf].append(s)
+        else:
+            skills_cascades[cf] = [s]
+pp.pprint(skills_cascades)
+input()
 
 ##print(skills)
 ##pp.pprint(skills)
