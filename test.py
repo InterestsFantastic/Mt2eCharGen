@@ -49,3 +49,6 @@ c.gain('soc 12')
 
 pp.pprint(c.log)
 print(c.char_description)
+c.gain('soc -2')
+c.gain('ally -2')
+print(c.char_description)
