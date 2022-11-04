@@ -11,11 +11,19 @@ from utils import set_zeros
 people = 'ally enemy patron rival contact'.split()
 
 def parse_gain_skill(desc):
-    assert False, 'ensure that skill is in skill list here.'
     '''Helper for Character.gain_skill
     Splits 'carouse 1' into ('carouse', '=', 1).
     Splits 'carouse +1' into ('carouse', '+', 1).'''
-    skill, rest = desc.split()
+    if ') ' in desc:
+        skill, rest = desc.split(') ')
+        skill += ')'
+    else:
+        skill, rest = desc.split()
+
+    assert rest[0] is not '-', 'Losing skills not supported.'
+
+    skill = findskill(skill) 
+    assert skill, f'Skill in {desc} not found.'
     mod = '+' if rest[0] == '+' else '='
     val = int(rest)
     return skill, mod, val
