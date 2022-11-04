@@ -33,6 +33,7 @@ class Character:
         '''characteristic_method can bet set to 'boon' or 'bane' if desired.'''
         if characteristic_method is not None:
             self.gen(characteristic_method)
+        self.skills = {}
         self.agent = 'agent'
         set_zeros(self, people)
 
@@ -71,8 +72,6 @@ class Character:
                 self.skills[skill] = val
             else:
                 self.skills[skill] += val
-        else:
-            assert False, f'Unknown modifier for gaining a skill: {mod}'
 
     def gen(self, characteristic_method='normal'):
         self.terms=1

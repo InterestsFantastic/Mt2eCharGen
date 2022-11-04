@@ -12,6 +12,13 @@ print(parse_gain_skill('carouse 1'))
 print(parse_gain_skill('carouse +1'))
 print(parse_gain_skill('Animals (Handling) +1'))
 print(parse_gain_skill('Animals (handling) +1'))
+c.gain_skill('carouse 0')
+c.gain_skill('carouse 1')
+c.gain_skill('carouse +1')
+c.gain_skill('carouse 0')
+c.gain_skill('Animals (Handling) +1')
+c.gain_skill('Animals (handling) +1')
+print(c.skills)
 print(parse_gain_skill('vacc suit +1'))
 ##print(parse_gain_skill('carouse -1')) # Works
 
