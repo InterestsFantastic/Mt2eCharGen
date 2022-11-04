@@ -51,14 +51,7 @@ class Character:
 
         if parse_gain_skill(gained):
             self.gain_skill(gained)
-        elif parts[0] in people:
-            if len(parts) == 1:
-                setattr(self, parts[0], getattr(self, parts[0]) + 1)
-                return f'Gained {gained}.'
-            else:
-                assert False, 'Incomplete'
-        elif parts[0] in characteristics:
-            # Default gain is 1.
+        elif parts[0] in people or parts[0] in characteristics:
             if len(parts) == 1:
                 change = 1
             else:

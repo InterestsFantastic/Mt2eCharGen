@@ -41,5 +41,11 @@ events['life'][6].run(c)
 events['life'][7].run(c)
 events['edu'][5].run(c)
 events['edu'][12].run(c)
+
+c.gain('ally 2')
+c.gain('ally 2')
+c.gain('ally 2')
+c.gain('soc 12')
+
 pp.pprint(c.log)
 print(c.char_description)
