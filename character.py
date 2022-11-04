@@ -20,7 +20,7 @@ def parse_gain_skill(desc):
     else:
         skill, rest = desc.split()
 
-    assert rest[0] is not '-', 'Losing skills not supported.'
+    assert rest[0] != '-', 'Losing skills not supported.'
 
     skill = findskill(skill) 
     assert skill, f'Skill in {desc} not found.'
