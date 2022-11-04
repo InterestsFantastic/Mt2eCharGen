@@ -16,11 +16,7 @@ def parse_gain_skill(desc):
     Splits 'carouse 1' into ('carouse', '=', 1).
     Splits 'carouse +1' into ('carouse', '+', 1).'''
     skill, rest = desc.split()
-    if rest[0] == '+':
-        mod = '+'
-        rest = rest[1:]
-    else:
-        mod = '='
+    mod = '+' if rest[0] == '+' else '='
     val = int(rest)
     return skill, mod, val
 
