@@ -1,4 +1,4 @@
-from mt2emechanics import events#, skills, skills_aliases
+from mechanics import events#, skills, skills_aliases
 from character import Character, parse_gain_skill
 
 import pprint

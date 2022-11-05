@@ -1,6 +1,6 @@
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
-from mt2emechanics import  characteristic_modifier, characteristics, randphys, \
+from mechanics import  characteristic_modifier, characteristics, randphys, \
      phys_characteristics, skills, findskill
 from rpgroller.roller import roll
 from random import choice

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from mt2emechanics import skills, skills_aliases
+from mechanics import skills, skills_aliases
 from utils import get_key_from_aliases
 
 class Console:
@@ -9,7 +9,7 @@ class Console:
         return get_key_from_aliases(out, skills, skills_aliases)
 
 from character import Character
-from mt2emechanics import careers
+from mechanics import careers
 c = Character()
 c.agent = Console()
 ##print(careers['University'].events[9].run(c))
