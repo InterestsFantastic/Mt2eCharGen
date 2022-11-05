@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
 from mt2emechanics import  characteristic_modifier, characteristics, randphys, \
@@ -6,10 +5,11 @@ from mt2emechanics import  characteristic_modifier, characteristics, randphys, \
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
-from utils import set_zeros
+from utils import set_zeros, default_second_elem
 
 people = 'ally enemy patron rival contact'.split()
-zeros = 'qual_dm'.split()
+zeros = 'qual'.split()
+counters = people + characteristics + zeros
 
 def parse_gain_skill(desc):
     '''Helper for Character.gain_skill
@@ -33,16 +33,6 @@ def parse_gain_skill(desc):
     val = int(val)
     return skill, mod, val
 
-def default_second_elem(parts, default=1):
-    '''Looks at parts, as a list, to see if it has one or two elements, then
-    returns the int of the 2nd elem, or a default of 1.'''
-    assert len(parts) < 3, f'Unknown structure {parts}.'
-    if len(parts) == 1:
-        val = 1
-    else:
-        val = int(parts[1])
-    return val
-
 class Character:
     def __init__(self, characteristic_method='normal'):
         '''characteristic_method can bet set to 'boon' or 'bane' if desired.'''
@@ -58,16 +48,13 @@ class Character:
         '''Gain something, like a skill, ally, etc.'''
         # Supports things like 'ally 2'
         if parse_gain_skill(gained):
-            self.gain_skill(gained)
-            assert False, 'Incomplete, returns nothing.'
+            return self.gain_skill(gained)
+
         parts = gained.split(' ')
-        if parts[0] in people or parts[0] in characteristics:
+        if parts[0] in counters:
             change = default_second_elem(parts)
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'
-        elif parts[0] == 'benefit':
-            self.benefit_dms.append(default_second_elem(parts))
-            return f'Gained {change} to a benefits roll.'
     
     def gain_skill(self, desc):
         '''Character gains a skill.
@@ -84,6 +71,7 @@ class Character:
                 self.skills[skill] = val
             else:
                 self.skills[skill] += val
+        return f'Skill {skill} becomes {self.skills[skill]}.'
 
     def gen(self, characteristic_method='normal'):
         self.terms=1

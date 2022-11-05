@@ -1,8 +1,8 @@
-#!/usr/bin/python3
 '''Careers and career events/mishaps.'''
-from utils import setattrs
+from utils import setattrs, default_second_elem
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
+from character import counters
 import inflect
 inflection = inflect.engine()
 
@@ -112,7 +112,7 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        dothese = {'life':[2,3,5,6,7], 'edu':[5,12]}
+        dothese = {'life':[2,3,5,6,7,9,10], 'edu':[5,12]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -129,11 +129,18 @@ class Event:
             self.happen = none_event
         elif event == 'injury':
             self.happen = injury
-        elif event[:5] == 'gain ':
+        elif event[:5] == 'gain ' or event.split(' ')[0] in counters:
             def func(char):
                 return char.gain(event[5:])
             self.happen = func
+        elif event[:7] == 'benefit':
+            def func(char):
+                char.benefit_dms.append(default_second_elem(event.split(' ')))
+                return f'Gained {char.benefit_dms[-1]} to a benefits roll.'
+            self.happen = func
+
         if not done:
+            print(self.career_short, self.num)
             assert False, 'Incomplete.'
 ##            print(self.happen())
         

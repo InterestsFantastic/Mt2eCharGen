@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 def make_aliases(dictin, key):
     '''Given a dictin with long keys, "key" is the name of a short form field.
     Using that key, it creates an alias dict for output.
@@ -39,3 +38,13 @@ def set_zeros(self, keys):
     '''Gives an object attributes with value 0.'''
     for k in keys:
         setattr(self, k, 0)
+
+def default_second_elem(parts, default=1):
+    '''Looks at parts, as a list, to see if it has one or two elements, then
+    returns the int of the 2nd elem, or a default of 1.'''
+    assert len(parts) < 3, f'Unknown structure {parts}.'
+    if len(parts) == 1:
+        val = 1
+    else:
+        val = int(parts[1])
+    return val
