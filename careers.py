@@ -108,6 +108,12 @@ def injury(char):
     return char.injure()
 
 
+class DummyEvent(Event):
+    def __init__(self, script):
+        self.script = script
+        self.make_happen()
+
+
 class Event:
     def __init__(self, attribs):
         setattrs(self, attribs)
@@ -144,7 +150,8 @@ class Event:
         elif event[:8] == 'choose: ':
             def func(char):
                 choice = char.agent.choose(self.desc, event[8:])
-                return f'Chose {choice}.'
+                e = DummyEvent(choice)
+                return f'Chose {choice}. ' + e.happen()
             self.happen = func
         if not done:
             print(self.career_short, self.num)
