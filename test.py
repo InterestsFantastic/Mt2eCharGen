@@ -1,11 +1,14 @@
 from careers import events#, skills, skills_aliases
 from character import Character, parse_gain_skill
+from agent import Console
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 ##input('imports complete')
 c = Character()
+c.agent = Console
+
 print(c.char_description)
 
 ##print(parse_gain_skill('carouse 0'))
@@ -43,7 +46,7 @@ events['life'][9].run(c)
 events['life'][10].run(c)
 events['edu'][5].run(c)
 events['edu'][12].run(c)
-
+events['life'][4].run(c)
 ##c.gain('ally 2')
 ##c.gain('ally 2')
 ##c.gain('ally 2')

@@ -115,7 +115,7 @@ class Event:
         
     def make_happen(self):
         '''Assigns functions to self.happen (like `edu2()`).'''
-        dothese = {'life':[2,3,5,6,7,9,10], 'edu':[5,12]}
+        dothese = {'life':[2,3,4,5,6,7,9,10], 'edu':[5,12]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -141,7 +141,11 @@ class Event:
                 char.benefit_dms.append(default_second_elem(event.split(' ')))
                 return f'Gained {char.benefit_dms[-1]} to a benefits roll.'
             self.happen = func
-
+        elif event[:8] == 'choose: ':
+            def func(char):
+                choice = char.agent.choose(self.desc, event[8:])
+                return f'Chose {choice}.'
+            self.happen = func
         if not done:
             print(self.career_short, self.num)
             assert False, 'Incomplete.'
