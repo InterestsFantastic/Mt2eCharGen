@@ -1,15 +1,11 @@
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
 from mechanics import  characteristic_modifier, characteristics, randphys, \
-     phys_characteristics, skills, findskill
+     phys_characteristics, skills, findskill, char_zeros, people, char_counters
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
 from utils import set_zeros, default_second_elem
-
-people = 'ally enemy patron rival contact'.split()
-zeros = 'qual'.split()
-counters = people + characteristics + zeros
 
 def parse_gain_skill(desc):
     '''Helper for Character.gain_skill
@@ -42,7 +38,7 @@ class Character:
         self.benefit_dms = []
         self.agent = 'agent'
         set_zeros(self, people)
-        set_zeros(self, zeros)
+        set_zeros(self, char_zeros)
 
     def gain(self, gained):
         '''Gain something, like a skill, ally, etc.'''
@@ -51,7 +47,7 @@ class Character:
             return self.gain_skill(gained)
 
         parts = gained.split(' ')
-        if parts[0] in counters:
+        if parts[0] in char_counters:
             change = default_second_elem(parts)
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'

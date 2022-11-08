@@ -1,4 +1,4 @@
-from mechanics import events#, skills, skills_aliases
+from careers import events#, skills, skills_aliases
 from character import Character, parse_gain_skill
 
 import pprint

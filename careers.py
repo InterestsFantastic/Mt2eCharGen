@@ -2,7 +2,10 @@
 from utils import setattrs, default_second_elem
 from mt2erolls import roll_normal
 from rpgroller.roller import roll
-from character import counters
+from mechanics import char_counters
+from ODSReader.odsreader import ODSReader
+from ODSReader.utils import keyval_sheet_to_dict, dict_sheet_to_dict_of_dicts, dict_sheet_to_dict_of_objs, dict_sheet_to_list_of_dicts
+
 import inflect
 inflection = inflect.engine()
 
@@ -129,7 +132,7 @@ class Event:
             self.happen = none_event
         elif event == 'injury':
             self.happen = injury
-        elif event[:5] == 'gain ' or event.split(' ')[0] in counters:
+        elif event[:5] == 'gain ' or event.split(' ')[0] in char_counters:
             def func(char):
                 return char.gain(event[5:])
             self.happen = func
@@ -233,4 +236,21 @@ def edu11(char):
 
 def edu12(char):
     char.soc += 1
+
+
+mechanics_file = 'mechanics.ods'
+mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
+
+events_funcs = [str, int]
+events_keys = ['career_short', 'num']
+##events = dict_sheet_to_dict_of_dicts(mechanics, 'Events', events_keys, events_funcs)
+events = dict_sheet_to_dict_of_objs(mechanics, 'Events', Event, events_keys, events_funcs)
+##pp.pprint(events)
+##pp.pprint(events['life'])
+##print(dir(events['life'][2]))
+##pp.pprint(events['life'][2].career_short)
+##print(events['life'][2].script)
+##pp.pprint(events['life'][3].desc)
+##pp.pprint(events['life'][3].happen)
+##input('End of test.')
 
