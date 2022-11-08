@@ -49,6 +49,7 @@ class Character:
         parts = gained.split(' ')
         if parts[0] in char_counters:
             change = default_second_elem(parts)
+            print(parts[0], change)
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'
     
@@ -96,7 +97,6 @@ class Character:
         # By default, roll 1d6.
         if num == 0:
             num = roll('1d6')
-            print(num)
 
         if num == 1:
             out  = 'Nearly killed – reduce one physical characteristic by 1D, reduce two other physical characteristics by 2.'
