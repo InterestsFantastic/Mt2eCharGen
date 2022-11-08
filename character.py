@@ -49,7 +49,6 @@ class Character:
         parts = gained.split(' ')
         if parts[0] in char_counters:
             change = default_second_elem(parts)
-            print(parts[0], change)
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'
     
