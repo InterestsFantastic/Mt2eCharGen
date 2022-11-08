@@ -12,7 +12,8 @@ mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
 non_proficiency_penalty = -3
 
-people = 'ally enemy patron rival contact'.split()
+# The order of people is subjectively best to worst.
+people = 'ally patron contact rival enemy'.split()
 char_zeros = 'qual'.split()
 characteristics = 'str dex end int edu soc'.split()
 phys_characteristics = 'str dex end'.split()
