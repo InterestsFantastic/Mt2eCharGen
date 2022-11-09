@@ -108,25 +108,23 @@ def injury(char):
     return char.injure()
 
 
-class DummyEvent(Event):
-    def __init__(self, script):
-        self.script = script
-        self.make_happen()
-
-
 class Event:
     def __init__(self, attribs):
         setattrs(self, attribs)
-        self.make_happen()
+        if self.can_make_happen():
+            self.make_happen()
         
-    def make_happen(self):
-        '''Assigns functions to self.happen (like `edu2()`).'''
+    def can_make_happen(self):
+        # For testing, lists what methods are to be built.
         dothese = {'life':[2,3,4,5,6,7,9,10], 'edu':[5,12]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
             return
-
+        return True
+    
+    def make_happen(self):
+        '''Assigns functions to self.happen.'''
         event = self.script
         if event[-1] == '.':
             done = True
@@ -150,8 +148,9 @@ class Event:
         elif event[:8] == 'choose: ':
             def func(char):
                 choice = char.agent.choose(self.desc, event[8:])
-                e = DummyEvent(choice)
-                return f'Chose {choice}. ' + e.happen()
+                # Ensure that the choice is read as done.
+                e = DummyEvent(choice + '.')
+                return f'Chose {choice}. ' + e.happen(char)
             self.happen = func
         if not done:
             print(self.career_short, self.num)
@@ -169,6 +168,11 @@ class Event:
         if result is not None:
             logstr += f' {result}'
         char.log.append(logstr)
+
+class DummyEvent(Event):
+    def __init__(self, script):
+        self.script = script
+        self.make_happen()
 
 def edu2(char):
     char.can_test_psi = True
