@@ -120,7 +120,7 @@ class Event:
         
     def can_make_happen(self):
         # For testing, lists what methods are to be built.
-        dothese = {'life':[2,3,4,5,6,7,9,10,11], 'edu':[5,12]}
+        dothese = {'life':[2,3,4,5,6,7,8,9,10,11], 'edu':[5,12]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -180,8 +180,21 @@ class DummyEvent(Event):
         self.script = script
         self.make_happen()
 
+##You are betrayed in some fashion by a friend. If you have any
+##Contacts or Allies, convert one into a Rival or Enemy. Otherwise,
+##gain a Rival or an Enemy.
 def life8(char):
-    pass
+    out = ''
+    if char.contact and char.ally:
+        script = 'choose: gain ally -1, gain contact -1.'
+        assert False, 'Not done.'
+    elif char.contact:
+        out = char.gain('contact -1')
+    elif char.ally:
+        out = char.gain('ally -1')
+    script = 'choose: gain enemy, gain rival.'
+    assert False, 'Not done.'
+    return out
 
 mechanics_file = 'mechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
