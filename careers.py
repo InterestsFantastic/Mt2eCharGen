@@ -120,6 +120,12 @@ def prison(char):
     char.next_career = 'pris'
     return 'Next career is prison.'
 
+def test_psi(char):
+    '''Character is injured.'''
+    assert False, 'Not done.'
+    char.next_career = 'psi'
+    return 'Next career is prison.'
+
 class Event:
     def __init__(self, attribs):
         setattrs(self, attribs)
@@ -155,6 +161,8 @@ class Event:
                 self.happen = injury
             elif event == 'prison':
                 self.happen = prison
+            elif event == 'test psi':
+                self.happen = test_psi
             elif event[:5] == 'gain ' or event.split(' ')[0] in char_counters:
                 def func(char):
                     return char.gain(event[5:])
