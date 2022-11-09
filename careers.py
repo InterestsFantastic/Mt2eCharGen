@@ -116,15 +116,11 @@ def injury(char):
     return char.injure()
 
 def prison(char):
-    '''Character is injured.'''
     char.next_career = 'pris'
     return 'Next career is prison.'
 
 def test_psi(char):
-    '''Character is injured.'''
-    assert False, 'Not done.'
-    char.next_career = 'psi'
-    return 'Next career is prison.'
+    return char.test_psi():
 
 class Event:
     def __init__(self, attribs):
