@@ -97,6 +97,14 @@ class Career:
         
         return char.graduated
 
+def make_choice(prompt, choices):
+    '''Gets a choice fom char's agent and returns it.'''
+    def func(char):
+        choice = char.agent.choose(prompt, choices)
+        # Ensure that the choice is read as done.
+        e = DummyEvent(choice + '.')
+        return f'Chose {choice}. ' + e.happen(char)
+    return func
 
 def none_event(char):
     '''Nothing happens as a result of this event being run.'''
@@ -156,15 +164,17 @@ class Event:
                     return f'Gained {char.benefit_dms[-1]} to a benefits roll.'
                 self.happen = func
             elif event[:8] == 'choose: ':
-                def func(char):
-                    choice = char.agent.choose(self.desc, event[8:])
-                    # Ensure that the choice is read as done.
-                    e = DummyEvent(choice + '.')
-                    return f'Chose {choice}. ' + e.happen(char)
-                self.happen = func
+                self.happen = make_choice(self.desc, event[8:])
 
+        # If there isn't a . at the end of the script, then this means that you
+        # need to run some custom code from a named function in this module.
         if custom:
-            self.happen = globals()[self.career_short + str(self.num)]
+            try:
+                self.happen = globals()[self.career_short + str(self.num)]
+            except KeyError:
+                err = f'No method found for this event, did you mean to have a period at the end of the script? Event: {self.career_short} {self.num}.'
+                print(err)
+                assert False, err
 
         
     def run(self, char):
@@ -180,20 +190,23 @@ class DummyEvent(Event):
         self.script = script
         self.make_happen()
 
-##You are betrayed in some fashion by a friend. If you have any
-##Contacts or Allies, convert one into a Rival or Enemy. Otherwise,
-##gain a Rival or an Enemy.
 def life8(char):
+    '''Lose one of ally or contact (if available) and gain enemy or rival.'''
     out = ''
+    # Losing 1 of ally or contact if available.
     if char.contact and char.ally:
-        script = 'choose: gain ally -1, gain contact -1.'
-        assert False, 'Not done.'
+        prompt = 'Choose between losing an ally and losing a contact.'
+        choices = 'gain ally -1, gain contact -1'
+        out = make_choice(prompt, choices)(char)
     elif char.contact:
         out = char.gain('contact -1')
     elif char.ally:
         out = char.gain('ally -1')
-    script = 'choose: gain enemy, gain rival.'
-    assert False, 'Not done.'
+
+    # Gaining enemy or rival.
+    prompt = 'Choose between losing an ally and losing a contact.'
+    choices = 'gain rival, gain enemy'
+    out += make_choice(prompt, choices)(char)
     return out
 
 mechanics_file = 'mechanics.ods'
