@@ -8,7 +8,7 @@ class Console:
         e.g. 'choose: gain mil 1, gain investigate 1, gain soc +2.
         It receives the prompt typically from Event.desc and
         generates the choices by splitting on ', ' after 'choose: '.'''
-        print(prompt + '\n')
+        print('\n' + prompt + '\n')
         choices = choices.split(', ')
         input_prompt = 'Choose:\n'
         for i,c in enumerate(choices):
