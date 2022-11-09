@@ -130,42 +130,42 @@ class Event:
     def make_happen(self):
         '''Assigns functions to self.happen.'''
         event = self.script
-        if event[-1] == '.':
-            done = True
-            event = event[:-1]
+        # Is event None? Is it complete?
+        if event is None:
+            custom = True
+        elif event[-1] != '.':
+            custom = True
         else:
-            done = False
-        
-        if event == 'none':
-            self.happen = none_event
-        elif event == 'injury':
-            self.happen = injury
-        elif event == 'prison':
-            self.happen = prison
-        elif event[:5] == 'gain ' or event.split(' ')[0] in char_counters:
-            def func(char):
-                return char.gain(event[5:])
-            self.happen = func
-        elif event[:8] == 'benefit ':
-            def func(char):
-                char.benefit_dms.append(default_second_elem(event.split(' ')))
-                return f'Gained {char.benefit_dms[-1]} to a benefits roll.'
-            self.happen = func
-        elif event[:8] == 'choose: ':
-            def func(char):
-                choice = char.agent.choose(self.desc, event[8:])
-                # Ensure that the choice is read as done.
-                e = DummyEvent(choice + '.')
-                return f'Chose {choice}. ' + e.happen(char)
-            self.happen = func
-        if not done:
-            print(self.career_short, self.num)
-            assert False, 'Incomplete.'
-##            print(self.happen())
-        
-        # Look at script
-        # 
-##        self.happen = globals()[self.career_short + str(self.num)]
+            event = event[:-1]
+            custom = False
+
+        if event is not None: 
+            if event == 'none':
+                self.happen = none_event
+            elif event == 'injury':
+                self.happen = injury
+            elif event == 'prison':
+                self.happen = prison
+            elif event[:5] == 'gain ' or event.split(' ')[0] in char_counters:
+                def func(char):
+                    return char.gain(event[5:])
+                self.happen = func
+            elif event[:8] == 'benefit ':
+                def func(char):
+                    char.benefit_dms.append(default_second_elem(event.split(' ')))
+                    return f'Gained {char.benefit_dms[-1]} to a benefits roll.'
+                self.happen = func
+            elif event[:8] == 'choose: ':
+                def func(char):
+                    choice = char.agent.choose(self.desc, event[8:])
+                    # Ensure that the choice is read as done.
+                    e = DummyEvent(choice + '.')
+                    return f'Chose {choice}. ' + e.happen(char)
+                self.happen = func
+
+        if custom:
+            self.happen = globals()[self.career_short + str(self.num)]
+
         
     def run(self, char):
         '''Run and log life event.'''
