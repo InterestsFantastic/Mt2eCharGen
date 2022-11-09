@@ -120,7 +120,7 @@ def prison(char):
     return 'Next career is prison.'
 
 def test_psi(char):
-    return char.test_psi():
+    return char.test_psi()
 
 class Event:
     def __init__(self, attribs):

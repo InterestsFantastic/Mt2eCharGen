@@ -40,6 +40,9 @@ class Character:
         set_zeros(self, people)
         set_zeros(self, char_zeros)
 
+    def test_psi(self):
+        assert False, 'Not done.'
+
     def gain(self, gained):
         '''Gain something, like a skill, ally, etc.'''
         # Supports things like 'ally 2'
@@ -134,13 +137,6 @@ class Character:
             out = 'No effect.'
         return out
 
-    def gain_ally(self):
-        self.allies.append('I')
-    def gain_rival(self):
-        self.rivals.append('I')
-    def gain_enemy(self):
-        self.enemies.append('I')
-        
     def characteristic_modifier(self, characteristic):
         '''Returns the characteristic modifier resultant from having a characteristic at a certain value, e.g. int returns 0 if character's int is 7.'''
         score = getattr(self, characteristic)
