@@ -98,7 +98,8 @@ class Career:
         return char.graduated
 
 def make_choice(prompt, choices):
-    '''Gets a choice fom char's agent and returns it.'''
+    '''Returns a func which gets a choice fom char's agent, and runs it
+    as an argument in a dummy event object.'''
     def func(char):
         choice = char.agent.choose(prompt, choices)
         # Ensure that the choice is read as done.
@@ -120,6 +121,8 @@ def prison(char):
     return 'Next career is prison.'
 
 def test_psi(char):
+    '''The character will tell itself, if successful, that it may enter into
+    psion career next if it wishes.'''
     return char.test_psi()
 
 class Event:
