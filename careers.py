@@ -130,7 +130,8 @@ class Event:
         
     def can_make_happen(self):
         # For testing, lists what methods are to be built.
-        dothese = {'life':[2,3,4,5,6,7,8,9,10,11], 'edu':[2,5,12]}
+        dothese = {'life':[2,3,4,5,6,7,8,9,10,11], 'edu':[2,5,12],
+                   'agent':[10]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
