@@ -107,6 +107,10 @@ def injury(char):
     '''Character is injured.'''
     return char.injure()
 
+def prison(char):
+    '''Character is injured.'''
+    char.next_career = 'pris'
+    return 'Next career is prison.'
 
 class Event:
     def __init__(self, attribs):
@@ -116,7 +120,7 @@ class Event:
         
     def can_make_happen(self):
         # For testing, lists what methods are to be built.
-        dothese = {'life':[2,3,4,5,6,7,9,10], 'edu':[5,12]}
+        dothese = {'life':[2,3,4,5,6,7,9,10,11], 'edu':[5,12]}
         if self.career_short not in dothese:
             return
         if self.num not in dothese[self.career_short]:
@@ -136,11 +140,13 @@ class Event:
             self.happen = none_event
         elif event == 'injury':
             self.happen = injury
+        elif event == 'prison':
+            self.happen = prison
         elif event[:5] == 'gain ' or event.split(' ')[0] in char_counters:
             def func(char):
                 return char.gain(event[5:])
             self.happen = func
-        elif event[:7] == 'benefit':
+        elif event[:8] == 'benefit ':
             def func(char):
                 char.benefit_dms.append(default_second_elem(event.split(' ')))
                 return f'Gained {char.benefit_dms[-1]} to a benefits roll.'
@@ -174,84 +180,8 @@ class DummyEvent(Event):
         self.script = script
         self.make_happen()
 
-def edu2(char):
-    char.can_test_psi = True
-
-def edu3(char):
-    char.can_graduate = False
-
-def edu4(char):
-    event_result = char.characteristic_roll('soc 8+', extras='unmodified')
-    if event_result[1] == 2:
-        char.next_career = 'prison'
-        char.can_graduate = False
-        char.gain_enemy()
-        return 'Gained enemy, can not graduate, and next career is Prison.'
-    if event_result[0]:
-        char.gain_rival()
-        return 'Gained rival.'
-    else:
-        char.gain_enemy()
-        return 'Gained enemy.'
-
-def edu5(char):
-    char.gain_skill('carouse +1')
-
-def edu6(char):
-    thisroll = roll('1d3')
-    for x in range(thisroll):
-        char.gain_ally()
-    return f'Gained {thisroll} {inflection.plural("ally", thisroll)}.'
-
-def edu7(char):
-    # 7: Life Event. Roll on the Life Events table (see page 44).
-    assert False, 'incomplete'
-
-def edu8(char):
-    event_result = char.characteristic_roll('soc 8+')
-    if event_result:
-        char.gain_ally()
-        char.gain_enemy()
-        return 'Gained ally and enemy.'
-
-##You develop a healthy interest in a hobby or other area of study.
-##Gain any skill of your choice, with the exception of Jack-of-all-Trades,
-##at level 0.
-def edu9(char):
-    assert False, 'incomplete.' # figure out how to structure program!
-    chosen_skill = char.agent.choose_skill('s', 'joat') # e.g. how to find s!
-    char.gain_skill(f'chosen_skill +1')
-    return f'Chose {chosen_skill}.'
-
-def edu10(char):
-    assert False, 'incomplete.'
-    chosen_skill = 'bribery'
-    newproof = char.characteristic_roll(f'{chosen_skill} 9+')
-    if newproof:
-        char.gain_skill(f'chosen_skill +1')
-        char.gain_rival()
-        return 'Gained a level in {chosen_skill}.'
-
-def edu11(char):
-    assert False, 'incomplete'
-    choosen_path = 'flee'
-    if chosen_path == 'flee':
-        char.can_graduate = False
-        char.next_career = 'drifter'
-        return 'Fled the draft to become a drifter.'
-    else:
-        drafted = char.characteristic_roll('soc 9+')
-        if drafted:
-            char.can_graduate = False
-            service = ['army', 'army', 'army', 'marines', 'marines', 'navy']
-            service = choice(service)
-            char.next_career = service
-            char.drafted = True
-            return f'Drafted into {service.title()}.'
-
-def edu12(char):
-    char.soc += 1
-
+def life8(char):
+    pass
 
 mechanics_file = 'mechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
