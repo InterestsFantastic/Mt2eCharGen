@@ -6,7 +6,8 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 c = Character()
-c.agent = Console
+c.agent = Console(c)
+
 print(c.char_description)
 
 events['life'][3].run(c)
