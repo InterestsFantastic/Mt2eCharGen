@@ -144,6 +144,7 @@ class Event:
         elif event[-1] != '.':
             custom = True
         else:
+            #Trimming the . at the end here to eval.
             event = event[:-1]
             custom = False
 
@@ -166,8 +167,6 @@ class Event:
             elif event[:8] == 'choose: ':
                 self.happen = make_choice(self.desc, event[8:])
 
-        # If there isn't a . at the end of the script, then this means that you
-        # need to run some custom code from a named function in this module.
         if custom:
             try:
                 self.happen = globals()[self.career_short + str(self.num)]
@@ -175,7 +174,6 @@ class Event:
                 err = f'No method found for this event, did you mean to have a period at the end of the script? Event: {self.career_short} {self.num}.'
                 print(err)
                 assert False, err
-
         
     def run(self, char):
         '''Run and log life event.'''
