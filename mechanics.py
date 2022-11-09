@@ -14,7 +14,7 @@ non_proficiency_penalty = -3
 
 # The order of people is subjectively best to worst.
 people = 'ally patron contact rival enemy'.split()
-char_zeros = 'qual'.split()
+char_zeros = 'qual benefits'.split()
 characteristics = 'str dex end int edu soc'.split()
 phys_characteristics = 'str dex end'.split()
 char_counters = people + characteristics + char_zeros
