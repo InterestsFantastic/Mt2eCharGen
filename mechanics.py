@@ -15,7 +15,7 @@ psi_test_price = 5000
 
 # The order of people is subjectively best to worst.
 people = 'ally patron mentor contact rival enemy'.split()
-char_zeros = 'qual benefits terms psi cr'.split()
+char_zeros = 'qual benefits terms psi cr artefacts amnesia_events ancient_tech'.split()
 characteristics = 'str dex end int edu soc'.split()
 phys_characteristics = 'str dex end'.split()
 char_counters = people + characteristics + char_zeros
