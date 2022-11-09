@@ -11,10 +11,11 @@ mechanics_file = 'mechanics.ods'
 mechanics = ODSReader(mechanics_file, clonespannedcolumns=True)
 
 non_proficiency_penalty = -3
+psi_test_price = 5000
 
 # The order of people is subjectively best to worst.
 people = 'ally patron mentor contact rival enemy'.split()
-char_zeros = 'qual benefits'.split()
+char_zeros = 'qual benefits terms psi cr'.split()
 characteristics = 'str dex end int edu soc'.split()
 phys_characteristics = 'str dex end'.split()
 char_counters = people + characteristics + char_zeros

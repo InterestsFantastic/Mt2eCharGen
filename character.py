@@ -1,7 +1,8 @@
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
 from mechanics import  characteristic_modifier, characteristics, randphys, \
-     phys_characteristics, skills, findskill, char_zeros, people, char_counters
+     phys_characteristics, skills, findskill, char_zeros, people, \
+     char_counters, psi_test_price
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
@@ -41,7 +42,15 @@ class Character:
         set_zeros(self, char_zeros)
 
     def test_psi(self):
-        assert False, 'Not done.'
+        '''Tests psionic strength.'''
+        self.cr -= psi_test_price
+        self.psi = roll(f'2d6-{self.terms}', min1=False)
+        result = self.psi > 0
+        if result:
+            self.next_career = 'psi'
+            return f'Character found to possess {self.psi} psionic strength.'
+        else:
+            return 'Character not found to possess psionic strength.'
 
     def gain(self, gained):
         '''Gain something, like a skill, ally, etc.'''
