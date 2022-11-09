@@ -186,6 +186,7 @@ class Event:
         char.log.append(logstr)
 
 class DummyEvent(Event):
+    '''This object exists specifically to make the happen method.'''
     def __init__(self, script):
         self.script = script
         self.make_happen()
