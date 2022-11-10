@@ -68,17 +68,20 @@ class Character:
         '''Character gains a skill.
         desc examples: carouse 0, carouse 1, carouse +1'''
         skill, mod, val = parse_gain_skill(desc)
-        
-        if mod == '=':
-            if skill not in self.skills or self.skills[skill] < val:
-                # Will not reduce a skill.
-                self.skills[skill] = val
+
+        out = ''
+        if skill not in self.skills:
+            self.skills[skill] = val
+            out += f'Skill {skill} becomes {self.skills[skill]}. '
+        elif mod == '=' and self.skills[skill] < val:
+            # Will not reduce a skill.
+            self.skills[skill] = val
+            out += f'Skill {skill} becomes {self.skills[skill]}. '
         elif mod == '+':
-            if skill not in self.skills:
-                self.skills[skill] = val
-            else:
-                self.skills[skill] += val
-        return f'Skill {skill} becomes {self.skills[skill]}.'
+            self.skills[skill] += val
+            out += f'Skill {skill} becomes {self.skills[skill]}. '
+        # Removing trailing space.
+        return out[:-1]
 
     def gen(self, characteristic_method='normal'):
         self.terms=1
