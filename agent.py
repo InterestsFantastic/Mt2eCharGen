@@ -3,7 +3,7 @@ from mechanics import skills, skills_aliases
 from utils import get_key_from_aliases
 
 class Console:
-    def __init__(self, char):
+    def __init__(self, char=None):
         self.char = char
         
     def choose(self, prompt, choices):
@@ -13,7 +13,9 @@ class Console:
         generates the choices by splitting on ', ' after 'choose: '.'''
         print('\n' + prompt + '\n')
         choices = choices.split(', ')
-        input_prompt = 'Choose (c to print character):\n'
+        input_prompt = 'Choose'
+        input_prompt += ' (c to print character):\n' if self.char is not None else ':\n'
+
         for i,c in enumerate(choices):
             input_prompt += f'{i}: {c}\n'
         input_prompt += 'Your Choice: '
