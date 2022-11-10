@@ -68,7 +68,6 @@ class Character:
         '''Character gains a skill.
         desc examples: carouse 0, carouse 1, carouse +1'''
         skill, mod, val = parse_gain_skill(desc)
-        assert skill, f'Skill not found in {desc}'
         
         if mod == '=':
             if skill not in self.skills or self.skills[skill] < val:
