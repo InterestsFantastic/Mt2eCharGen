@@ -66,14 +66,16 @@ class Character:
 
     def handle_cascade(self, skill):
         '''Game mechanics dictate that if you get drive 0 it applies to all cascaded driving skills, such as Drive (Tracked).'''
+        # Creating output that logs each change to a skill.
         out = ''
         for s in skills:
             if skills[s]['cascade_from'] == skill:
                 gain_result = self.gain_skill(f'{s} 0')
                 if gain_result != 'No effect.':
                     out += gain_result + ' '
-        # Removing trailing space.
-        return out[:-1]
+        # Removing trailing space. Ensuring _some_ output.
+        out = 'No effect.' if out == '' else out[:-1]
+        return out
     
     def gain_skill(self, desc):
         '''Character gains a skill.
