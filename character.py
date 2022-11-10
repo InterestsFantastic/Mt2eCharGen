@@ -32,7 +32,9 @@ class Character:
 
     def gain(self, gained):
         '''Gain something, like a skill, ally, ally 2, etc.'''
+        print(gained)
         if parse_gain_skill(gained):
+            print(gained)
             return self.gain_skill(gained)
 
         parts = gained.split(' ')
