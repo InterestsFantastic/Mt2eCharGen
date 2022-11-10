@@ -53,8 +53,7 @@ class Character:
             return 'Character not found to possess psionic strength.'
 
     def gain(self, gained):
-        '''Gain something, like a skill, ally, etc.'''
-        # Supports things like 'ally 2'
+        '''Gain something, like a skill, ally, ally 2, etc.'''
         if parse_gain_skill(gained):
             return self.gain_skill(gained)
 
