@@ -63,25 +63,41 @@ class Character:
             change = default_second_elem(parts)
             setattr(self, parts[0], getattr(self, parts[0]) + change)
             return f'Gained {change} {parts[0]}.'
+
+    def handle_cascade(self, skill):
+        '''Game mechanics dictate that if you get drive 0 it applies to all cascaded driving skills, such as Drive (Tracked).'''
+        out = ''
+        for s in skills:
+            if skills[s]['cascade_from'] == skill:
+                gain_result = self.gain_skill(f'{s} 0')
+                if gain_result != 'No effect.':
+                    out += gain_result + ' '
+        # Removing trailing space.
+        return out[:-1]
     
     def gain_skill(self, desc):
         '''Character gains a skill.
         desc examples: carouse 0, carouse 1, carouse +1'''
         skill, mod, val = parse_gain_skill(desc)
 
-        out = ''
+        if skills[skill]['cascade']:
+            assert val == 0, f'Can not take cascading skill {skill} at a level other than 0.'
+            return self.handle_cascade(skill)
+
         if skill not in self.skills:
             self.skills[skill] = val
-            out += f'Skill {skill} becomes {self.skills[skill]}. '
         elif mod == '=' and self.skills[skill] < val:
             # Will not reduce a skill.
             self.skills[skill] = val
-            out += f'Skill {skill} becomes {self.skills[skill]}. '
         elif mod == '+':
             self.skills[skill] += val
-            out += f'Skill {skill} becomes {self.skills[skill]}. '
-        # Removing trailing space.
-        return out[:-1]
+        else:
+            return 'No effect.'
+
+        if skills[skill]['cascade_from']:
+            assert False, 'Not done.'
+
+        return f'Skill {skill} becomes {self.skills[skill]}.'
 
     def gen(self, characteristic_method='normal'):
         self.terms=1
