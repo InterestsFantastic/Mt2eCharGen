@@ -51,6 +51,23 @@ def findskill(skill):
     else:
         return None
 
+def parse_gain_skill(desc):
+    '''Helper for Character.gain_skill
+    Splits 'carouse 1' into ('Carouse', '=', 1).
+    Splits 'carouse +1' into ('Carouse', '+', 1).
+    If skill is not found it will return None and therefore you want to make
+    sure that you aren't expecting multiple args if it can fail.'''
+
+    *skill, val = desc.split(' ')
+    if len(desc) == 1:
+        skill = skill[0]
+    else:
+        # eg "vacc suit"
+        skill = ' '.join(skill)
+    skill = findskill(skill)
+    if not skill:
+        return None
+    
 ##pp.pprint(noble_titles)
 ##pp.pprint(skills)
 ##pp.pprint(skills_aliases)

@@ -20,7 +20,7 @@ print(c.char_description)
 ##events['edu'][12].run(c)
 ##events['life'][4].run(c)
 ##events['life'][11].run(c)
-##events['life'][8].run(c)
+events['life'][8].run(c)
 ##events['edu'][2].run(c)
 events['agent'][10].run(c)
 

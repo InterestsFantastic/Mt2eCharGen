@@ -1,34 +1,12 @@
 '''Characters and injuries.'''
 from mt2erolls import pick_roll_method
 from mechanics import  characteristic_modifier, characteristics, randphys, \
-     phys_characteristics, skills, findskill, char_zeros, people, \
-     char_counters, psi_test_price
+     phys_characteristics, skills, char_zeros, people, \
+     char_counters, psi_test_price, findskill, parse_gain_skill
 from rpgroller.roller import roll
 from random import choice
 from TravellerLetterNumbers.travellerletternumbers import numbers_to_letters
 from utils import set_zeros, default_second_elem
-
-def parse_gain_skill(desc):
-    '''Helper for Character.gain_skill
-    Splits 'carouse 1' into ('Carouse', '=', 1).
-    Splits 'carouse +1' into ('Carouse', '+', 1).
-    If skill is not found it will return None and therefore you want to make
-    sure that you aren't expecting multiple args if it can fail.'''
-
-    *skill, val = desc.split(' ')
-    if len(desc) == 1:
-        skill = skill[0]
-    else:
-        # eg "vacc suit"
-        skill = ' '.join(skill)
-    skill = findskill(skill)
-    if not skill:
-        return None
-
-    assert val[0] != '-', 'Losing skills not supported.'
-    mod = '+' if val[0] == '+' else '='
-    val = int(val)
-    return skill, mod, val
 
 class Character:
     def __init__(self, characteristic_method='normal'):

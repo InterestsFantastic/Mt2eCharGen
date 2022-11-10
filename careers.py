@@ -104,6 +104,9 @@ def make_choice(prompt, choices):
         choice = char.agent.choose(prompt, choices)
         # Ensure that the choice is read as done.
         e = DummyEvent(choice + '.')
+        print(choice)
+        msg = e.happen(char)
+        print(msg)
         return f'Chose {choice}. ' + e.happen(char)
     return func
 
